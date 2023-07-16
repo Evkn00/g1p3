@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Shipwreck Project</title>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <!-- D3 library -->
-  <script type="text/javascript" src="static\js\logic.js"></script>
+  <title>Map Example</title>
+  <!-- Import Leaflet.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 
+  <!-- Import D3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
 
+  <!-- Import local CSS file -->
+  <link rel="stylesheet" href="static/css/style.css" />
 </head>
 <body>
-  <script>  </script>
+  <div class="container">
+    <div id="map"></div>
+    <div id="story-box">
+      <h2 id="wreck-name"></h2>
+      <div id="story-content"> <!--Lazy version-->
+        <p><strong>Loss Date:</strong> <span id="loss-date"></span></p>
+        <p><strong>Loss Location:</strong> <span id="loss-location"></span></p>
+        <p><strong>Loss Cause:</strong> <span id="loss-cause"></span></p>
+        <p><strong>Build Date:</strong> <span id="build-date"></span></p>
+        <p><strong>Hull Description:</strong> <span id="hull-desc"></span></p>
+        <p><strong>Port Built:</strong> <span id="port-built"></span></p>
+        <p><strong>Rig Description:</strong> <span id="rig-desc"></span></p>
+        <p><strong>Wreck Number:</strong> <span id="wreck-number"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import logic.js -->
+  <script src="static/js/logic.js"></script>
 </body>
 </html>

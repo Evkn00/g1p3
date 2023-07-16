@@ -1,0 +1,38 @@
+
+#map {
+  width: 75%;
+  height: 75vh;
+  float: left;
+}
+
+#story-box {
+  width: 25%;
+  height: 75vh;
+  float: left;
+  background-color: #784848;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+}
+
+#wreck-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#story-content {
+  margin-top: 10px;
+}
+
+#story-content p {
+  margin-bottom: 10px;
+}
+
+#story-content strong {
+  font-weight: bold;
+}
+
+#story-content span {
+  font-weight: normal;
+}
