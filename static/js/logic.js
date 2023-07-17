@@ -1,6 +1,27 @@
 // url = "http://127.0.0.1:5000/documents" // url for Flask API
 url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
 
+// Custom icon
+var shipIcon = L.icon({
+  iconUrl: 'static/images/Brig.png',
+  iconSize: [38, 38], // size of the icon
+  iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
+  popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
+});
+
+// Define the icon URLs for each RIGDESC value
+const iconUrls = {
+  Brig: 'static/images/Brig.png',
+  Brigantine: 'static/images/brigantine.png',
+  Barque: 'static/images/barque.png',
+  Snow: 'static/images/Snow.png',
+  Ketch: 'static/images/Ketch.png',
+  Schooner: 'static/images/Schooner.png',
+};
+
+// Create a default icon URL for unknown RIGDESC values
+const defaultIconUrl = 'static/images/ship.png';
+
 let myMap = L.map("map", {
   center: [-30.8, 130.9],
   zoom: 5
@@ -57,11 +78,21 @@ d3.json(url)
     console.log("BUILDDATE Array:", buildDateArr);
     console.log("LOSSDATE Array:", lossDateArr);
 
-    // Create a marker layer
-    const markerLayer = L.geoJSON(data, {
-      pointToLayer: function(feature, latlng) {
-        return L.marker(latlng);
-      },
+  // Create a marker layer
+  let markerLayer = L.geoJSON(data, {
+    pointToLayer: function(feature, latlng) {
+      const rigDesc = feature.properties.RIGDESC;
+      const iconUrl = iconUrls[rigDesc] || defaultIconUrl;
+
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: iconUrl,
+          iconSize: [38, 38],
+          iconAnchor: [19, 38],
+          popupAnchor: [0, -38],
+        }),
+      });
+    },
       onEachFeature: function(feature, layer) {
         // Bind popup content to each marker
         const popupContent = `<strong>Wreck Name:</strong> ${feature.properties.WRECKNAME}`;
@@ -77,6 +108,29 @@ d3.json(url)
     // Add the marker layer to the map
     markerLayer.addTo(myMap);
   });
+
+  var shipIcon;
+  if (feature.properties.RIGDESC === "Brig") {
+    new ShipIcon ({iconUrl: 'static/images/ship.png'})
+  } else {
+    new ShipIcon ({iconUrl: 'static/images/ship.png'})
+  }
+
+
+
+
+  // Custom icon
+  var ShipIcon = L.Icon.extend({
+    options:{
+      iconSize: [38, 38], // size of the icon
+      iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
+      popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
+    }
+  });
+
+  L.icon = function (options) {
+    return new L.Icon(options);
+  };    
 
 // Function to populate the story box
 function populateStoryBox(properties) {
