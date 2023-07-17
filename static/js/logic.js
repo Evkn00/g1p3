@@ -11,7 +11,7 @@ let myMap = L.map("map", {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap); */
 
-//Pretty map set
+// Pretty map set
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   subdomains: 'abcd',
@@ -19,14 +19,45 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jp
   maxZoom: 16
 }).addTo(myMap);
 
-
-
 // Use D3.js to load the data
 d3.json(url)
   .then(function(data) {
     console.log(data);
 
-    // Create a marker layer 
+    // Generate summary stats
+    // Number of records
+    let numberOfRecords = data.features.length;
+    console.log("Number of records: ", numberOfRecords);
+
+    // Summary Stats
+    const rigDescArr = [];
+    const hullDescArr = [];
+    const shipTypeArr = [];
+    const countryArr = [];
+    const buildDateArr = [];
+    const lossDateArr = [];
+
+    // Loop through each feature in the GeoJSON data
+    data.features.forEach(function(feature) {
+      const properties = feature.properties;
+
+      rigDescArr.push(properties.RIGDESC);
+      hullDescArr.push(properties.HULLDESC);
+      shipTypeArr.push(properties.SHIPTYPEDE);
+      countryArr.push(properties.COUNTRY);
+      buildDateArr.push(properties.BUILDDATE);
+      lossDateArr.push(properties.LOSSDATE);
+    });
+
+    // Log the arrays for verification
+    console.log("RIGDESC Array:", rigDescArr);
+    console.log("HULLDESC Array:", hullDescArr);
+    console.log("SHIPTYPEDE Array:", shipTypeArr);
+    console.log("COUNTRY Array:", countryArr);
+    console.log("BUILDDATE Array:", buildDateArr);
+    console.log("LOSSDATE Array:", lossDateArr);
+
+    // Create a marker layer
     const markerLayer = L.geoJSON(data, {
       pointToLayer: function(feature, latlng) {
         return L.marker(latlng);
@@ -35,7 +66,7 @@ d3.json(url)
         // Bind popup content to each marker
         const popupContent = `<strong>Wreck Name:</strong> ${feature.properties.WRECKNAME}`;
         layer.bindPopup(popupContent);
-        
+
         // Add click event listener to populate story box
         layer.on("click", function() {
           populateStoryBox(feature.properties);
@@ -49,8 +80,8 @@ d3.json(url)
 
 // Function to populate the story box
 function populateStoryBox(properties) {
-    const storyBox = document.getElementById("story-box");
-    storyBox.innerHTML = `
+  const storyBox = document.getElementById("story-box");
+  storyBox.innerHTML = `
       <h2>${properties.WRECKNAME}</h2>
       <p><strong>Wreck Number:</strong> ${properties.WRECKNR}</p>
       <p><strong>Loss Date:</strong> ${properties.LOSSDATE}</p>
@@ -60,7 +91,5 @@ function populateStoryBox(properties) {
       <p><strong>Hull Description:</strong> ${properties.HULLDESC}</p>
       <p><strong>Port Built:</strong> ${properties.PORTBUILT}</p>
       <p><strong>Rig Description:</strong> ${properties.RIGDESC}</p>
-
     `;
-  }
-  
+}
