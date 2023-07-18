@@ -1,5 +1,5 @@
 // url = "http://127.0.0.1:5000/documents" // url for Flask API
-url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
+url = "../data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
 
 // Custom icon
 var shipIcon = L.icon({
@@ -42,7 +42,7 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jp
 
 // Use D3.js to load the data
 d3.json(url)
-  .then(function(data) {
+  .then(function (data) {
     console.log(data);
 
     // Generate summary stats
@@ -59,7 +59,7 @@ d3.json(url)
     const lossDateArr = [];
 
     // Loop through each feature in the GeoJSON data
-    data.features.forEach(function(feature) {
+    data.features.forEach(function (feature) {
       const properties = feature.properties;
 
       rigDescArr.push(properties.RIGDESC);
@@ -78,28 +78,28 @@ d3.json(url)
     console.log("BUILDDATE Array:", buildDateArr);
     console.log("LOSSDATE Array:", lossDateArr);
 
-  // Create a marker layer
-  let markerLayer = L.geoJSON(data, {
-    pointToLayer: function(feature, latlng) {
-      const rigDesc = feature.properties.RIGDESC;
-      const iconUrl = iconUrls[rigDesc] || defaultIconUrl;
+    // Create a marker layer
+    let markerLayer = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        const rigDesc = feature.properties.RIGDESC;
+        const iconUrl = iconUrls[rigDesc] || defaultIconUrl;
 
-      return L.marker(latlng, {
-        icon: L.icon({
-          iconUrl: iconUrl,
-          iconSize: [38, 38],
-          iconAnchor: [19, 38],
-          popupAnchor: [0, -38],
-        }),
-      });
-    },
-      onEachFeature: function(feature, layer) {
+        return L.marker(latlng, {
+          icon: L.icon({
+            iconUrl: iconUrl,
+            iconSize: [38, 38],
+            iconAnchor: [19, 38],
+            popupAnchor: [0, -38],
+          }),
+        });
+      },
+      onEachFeature: function (feature, layer) {
         // Bind popup content to each marker
         const popupContent = `<strong>Wreck Name:</strong> ${feature.properties.WRECKNAME}`;
         layer.bindPopup(popupContent);
 
         // Add click event listener to populate story box
-        layer.on("click", function() {
+        layer.on("click", function () {
           populateStoryBox(feature.properties);
         });
       }
@@ -109,28 +109,28 @@ d3.json(url)
     markerLayer.addTo(myMap);
   });
 
-  var shipIcon;
-  if (feature.properties.RIGDESC === "Brig") {
-    new ShipIcon ({iconUrl: 'static/images/ship.png'})
-  } else {
-    new ShipIcon ({iconUrl: 'static/images/ship.png'})
+var shipIcon;
+if (feature.properties.RIGDESC === "Brig") {
+  new ShipIcon({ iconUrl: 'static/images/ship.png' })
+} else {
+  new ShipIcon({ iconUrl: 'static/images/ship.png' })
+}
+
+
+
+
+// Custom icon
+var ShipIcon = L.Icon.extend({
+  options: {
+    iconSize: [38, 38], // size of the icon
+    iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
   }
+});
 
-
-
-
-  // Custom icon
-  var ShipIcon = L.Icon.extend({
-    options:{
-      iconSize: [38, 38], // size of the icon
-      iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
-      popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
-    }
-  });
-
-  L.icon = function (options) {
-    return new L.Icon(options);
-  };    
+L.icon = function (options) {
+  return new L.Icon(options);
+};
 
 // Function to populate the story box
 function populateStoryBox(properties) {
@@ -147,3 +147,20 @@ function populateStoryBox(properties) {
       <p><strong>Rig Description:</strong> ${properties.RIGDESC}</p>
     `;
 }
+
+// David Button Access Section
+
+let btnWreckByDate = d3.select("#btnWreckByDate");
+let btnWreckByHull = d3.select("#btnWreckByHull");
+let btnWreckByOrigin = d3.select("#btnWreckByOrigin");
+
+btnWreckByDate.on("click", clickHandler(properties.LOSSDATE));
+btnWreckByHull.on("click", clickHandler(properties.HULLDESC));
+btnWreckByOrigin("click", clickHandler(properties.PORTBUILT));
+
+// Function to show graph
+
+function clickHandler(properties) {
+  console.log(properties)
+}
+
