@@ -1,5 +1,5 @@
 // url = "http://127.0.0.1:5000/documents" // url for Flask API
-url = "../data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
+url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
 
 // Custom icon
 var shipIcon = L.icon({
@@ -154,13 +154,14 @@ let btnWreckByDate = d3.select("#btnWreckByDate");
 let btnWreckByHull = d3.select("#btnWreckByHull");
 let btnWreckByOrigin = d3.select("#btnWreckByOrigin");
 
-btnWreckByDate.on("click", clickHandler(properties.LOSSDATE));
+btnWreckByDate.on("click", clickHandler());
 btnWreckByHull.on("click", clickHandler(properties.HULLDESC));
 btnWreckByOrigin("click", clickHandler(properties.PORTBUILT));
 
 // Function to show graph
 
 function clickHandler(properties) {
+  console.log("test");
   console.log(properties)
 }
 
