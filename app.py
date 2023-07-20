@@ -4,13 +4,14 @@ import re
 import re
 from flask import Flask, jsonify
 from bson import ObjectId 
-
+from flask_cors import CORS
 
 #Setup DB
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["Project3"]
 collection = db["ship_wreck_data"]
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # JSON encoder function to handle ObjectId serialization
 class JSONEncoder(json.JSONEncoder):

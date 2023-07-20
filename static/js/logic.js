@@ -1,4 +1,4 @@
-//url = "http://127.0.0.1:5000/documents"  url for Flask API
+//url = "http://127.0.0.1:5000/documents"  //url for Flask API
 url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
 
 // Custom icon
@@ -17,6 +17,11 @@ const iconUrls = {
   Snow: 'static/images/Snow.png',
   Ketch: 'static/images/Ketch.png',
   Schooner: 'static/images/Schooner.png',
+  Cutter: 'static/images/cutter.png',
+  Lugger: 'static/images/lugger.png',
+  Sloop: 'static/images/Sloop.png',
+  Yawl: 'static/images/yawl.png',
+  Dandy: 'static/images/dandy.png',
 };
 
 // Create a default icon URL for unknown RIGDESC values
@@ -26,11 +31,6 @@ let myMap = L.map("map", {
   center: [-30.8, 130.9],
   zoom: 5
 });
-
-// Basic Map set
-/* L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(myMap); */
 
 // Pretty map set
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
@@ -98,11 +98,21 @@ d3.json(url)
         const popupContent = `<strong>Wreck Name:</strong> ${feature.properties.WRECKNAME}`;
         layer.bindPopup(popupContent);
 
-        // Add click event listener to populate story box
-        layer.on("click", function() {
-          populateStoryBox(feature.properties);
-        });
-      }
+     // Add click event listener to populate story box and zoom to the marker
+  function onClickHandler() {
+    populateStoryBox(feature.properties);
+    myMap.flyTo(layer.getLatLng(), 8); // Adjust the zoom level as needed
+  }
+
+  function onClickOffHandler() {
+    myMap.flyTo(layer.getLatLng(-32.8385, 137.5724), 5); // Adjust the zoom level as needed
+    layer.off("click", onClickOffHandler);
+    //layer.on("click", onClickHandler);
+  }
+
+  layer.on("click", onClickHandler);
+  myMap.on("click", onClickOffHandler);
+}
     });
 
     // Add the marker layer to the map
