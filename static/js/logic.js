@@ -119,26 +119,6 @@ d3.json(url)
     markerLayer.addTo(myMap);
   });
 
- /*  var shipIcon;
-  if (feature.properties.RIGDESC === "Brig") {
-    new ShipIcon ({iconUrl: 'static/images/ship.png'})
-  } else {
-    new ShipIcon ({iconUrl: 'static/images/ship.png'})
-  } */
-
-  // Custom icon
-  var ShipIcon = L.Icon.extend({
-    options:{
-      iconSize: [38, 38], // size of the icon
-      iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
-      popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
-    }
-  });
-
-  L.icon = function (options) {
-    return new L.Icon(options);
-  };    
-
 // Function to populate the story box
 function populateStoryBox(properties) {
   const storyBox = document.getElementById("story-box");
