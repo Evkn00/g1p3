@@ -1,4 +1,4 @@
-// url = "http://127.0.0.1:5000/documents" // url for Flask API
+//url = "http://127.0.0.1:5000/documents"  url for Flask API
 url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
 
 // Custom icon
@@ -115,9 +115,6 @@ d3.json(url)
   } else {
     new ShipIcon ({iconUrl: 'static/images/ship.png'})
   }
-
-
-
 
   // Custom icon
   var ShipIcon = L.Icon.extend({

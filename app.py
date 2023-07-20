@@ -1,5 +1,6 @@
 import pymongo
 import json
+import re
 from flask import Flask, jsonify
 from bson import ObjectId 
 
@@ -20,11 +21,30 @@ class JSONEncoder(json.JSONEncoder):
 app = Flask(__name__)
 app.json_encoder = JSONEncoder 
 
-
+#route with all documents
 @app.route('/documents', methods=['GET'])
 def get_documents():
     documents = list(collection.find({}))
     return jsonify(documents)
 
+#route to filter by ship type
+@app.route('/documents/ship/<ship_type>', methods=['GET'])
+def get_ship_documents(ship_type):
+    ship_documents = list(collection.find({"properties.RIGDESC": ship_type}))
+
+    results = []
+    #loop through the returned documents and append to results
+    for document in ship_documents:
+        # Convert MongoDB document to GeoJSON format
+        geojson = {
+            "type": "Feature",
+            "geometry": document['geometry'],
+            "properties": document['properties']
+        }
+        results.append(geojson)
+
+    return jsonify(results)
+
+#Launch the app 
 if __name__ == '__main__':
     app.run(debug=True)
