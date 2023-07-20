@@ -119,12 +119,12 @@ d3.json(url)
     markerLayer.addTo(myMap);
   });
 
-  var shipIcon;
+ /*  var shipIcon;
   if (feature.properties.RIGDESC === "Brig") {
     new ShipIcon ({iconUrl: 'static/images/ship.png'})
   } else {
     new ShipIcon ({iconUrl: 'static/images/ship.png'})
-  }
+  } */
 
   // Custom icon
   var ShipIcon = L.Icon.extend({
@@ -154,3 +154,68 @@ function populateStoryBox(properties) {
       <p><strong>Rig Description:</strong> ${properties.RIGDESC}</p>
     `;
 }
+
+var popup = L.popup()
+.setLatLng([-34.9275, 138.60])
+.setContent("Adelaide.")
+.openOn(myMap);
+
+// Use D3 to read in samples.json
+d3.json(url).then((data) => {
+  // Select the dropdown menu with id "selDataset"
+  var dropdownContainer = d3.select("#selDataset");
+
+    // Get unique RIGDESC values
+    var rigDescValues = data.features.map(function(feature) {
+      return feature.properties.RIGDESC;
+    });
+  
+    // Get distinct RIGDESC values
+    var uniqueRigDescValues = [...new Set(rigDescValues)];
+
+  // Add each name as an option to the dropdown menu
+  dropdownContainer
+  .selectAll("option")
+  .data(uniqueRigDescValues)
+  .enter()
+  .append("option") 
+  .text(d => d)
+  .attr("value", d => d);
+
+  // Handle dropdown change event
+  dropdownContainer.on("change", function() {
+    var selectedRigDesc = this.value;
+    updatePlots(selectedRigDesc, data);
+  });
+
+  // Initial update with first sample
+  var firstSample = uniqueRigDescValues[0];
+  updatePlots(firstSample, data);
+});
+
+// Update plots function
+function updatePlots(selectedRigDesc, data) {
+  // Add your code to update the plots based on the selected RIGDESC value
+  console.log("Selected RIGDESC:", selectedRigDesc);
+
+};
+
+// Create a legend control.
+let legend = L.control({ position: 'bottomright' });
+
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create('div', 'info legend');
+  div.innerHTML += '<h4>Ships</h4>';
+  ships = ["Brigantine", "Cutter", "Dandy", "Ketch", "Lugger", "Schooner", "Sloop", "Yawl", "Barque", "Ship", "Snow"]
+  labels = ['static/images/brigantine.png', 'static/images/cutter.png', 'static/images/dandy.png', 'static/images/Ketch.png', 'static/images/lugger.png', 'static/images/Schooner.png', 'static/images/Sloop.png', 'static/images/yawl.png', 'static/images/barque.png', 'static/images/ship.png', 'static/images/Snow.png']
+      // loop through our ships and generate a label with their png for each ship
+      for (var i = 0; i < ships.length; i++) {
+        div.innerHTML +=
+            (" <img src="+ labels[i] +" height='20' width='20'>") + ships[i] + '<br>';
+    }
+  return div;
+};
+
+legend.addTo(myMap);
+;
+//>>>>>>> Stashed changes
