@@ -4,7 +4,7 @@ import re
 import re
 from flask import Flask, jsonify
 from bson import ObjectId 
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 #Setup DB
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -25,12 +25,14 @@ app.json_encoder = JSONEncoder
 
 #route with all documents
 @app.route('/documents', methods=['GET'])
+@cross_origin()
 def get_documents():
     documents = list(collection.find({}))
     return jsonify(documents)
 
 #route to filter by ship type
 @app.route('/documents/ship/<ship_type>', methods=['GET'])
+@cross_origin()
 def get_ship_documents(ship_type):
     ship_documents = list(collection.find({"properties.RIGDESC": ship_type}))
 

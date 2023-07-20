@@ -1,13 +1,14 @@
-//url = "http://127.0.0.1:5000/documents"  //url for Flask API
-url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
+url = "http://127.0.0.1:5000/documents"  //url for Flask API
+//url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
 
-// Custom icon
+/* // Custom icon *** DELETE?
 var shipIcon = L.icon({
   iconUrl: 'static/images/Brig.png',
   iconSize: [38, 38], // size of the icon
   iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
   popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
-});
+}); */
+
 
 // Define the icon URLs for each RIGDESC value
 const iconUrls = {
@@ -47,7 +48,7 @@ d3.json(url)
 
     // Generate summary stats
     // Number of records
-    let numberOfRecords = data.features.length;
+    let numberOfRecords = data.length;
     console.log("Number of records: ", numberOfRecords);
 
     // Summary Stats
@@ -59,7 +60,7 @@ d3.json(url)
     const lossDateArr = [];
 
     // Loop through each feature in the GeoJSON data
-    data.features.forEach(function(feature) {
+    data.forEach(function(feature) {
       const properties = feature.properties;
 
       rigDescArr.push(properties.RIGDESC);
@@ -146,7 +147,7 @@ d3.json(url).then((data) => {
   var dropdownContainer = d3.select("#selDataset");
 
     // Get unique RIGDESC values
-    var rigDescValues = data.features.map(function(feature) {
+    var rigDescValues = data.map(function(feature) {
       return feature.properties.RIGDESC;
     });
   
