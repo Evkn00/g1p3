@@ -1,13 +1,7 @@
-// url = "http://127.0.0.1:5000/documents" // url for Flask API
+//url = "http://127.0.0.1:5000/documents"  //url for Flask API
 url = "data/TOPO_Shipwrecks_GDA2020.geojson"; // temp using local GeoJSON as cannot use local FLASK instance when on github pages?
+console.log(url);
 
-// Custom icon
-var shipIcon = L.icon({
-  iconUrl: 'static/images/Brig.png',
-  iconSize: [38, 38], // size of the icon
-  iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
-  popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
-});
 
 // Define the icon URLs for each RIGDESC value
 const iconUrls = {
@@ -17,6 +11,11 @@ const iconUrls = {
   Snow: 'static/images/Snow.png',
   Ketch: 'static/images/Ketch.png',
   Schooner: 'static/images/Schooner.png',
+  Cutter: 'static/images/cutter.png',
+  Lugger: 'static/images/lugger.png',
+  Sloop: 'static/images/Sloop.png',
+  Yawl: 'static/images/yawl.png',
+  Dandy: 'static/images/dandy.png',
 };
 
 // Create a default icon URL for unknown RIGDESC values
@@ -26,11 +25,6 @@ let myMap = L.map("map", {
   center: [-30.8, 130.9],
   zoom: 5
 });
-
-// Basic Map set
-/* L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(myMap); */
 
 // Pretty map set
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
@@ -42,13 +36,15 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jp
 
 // Use D3.js to load the data
 d3.json(url)
-  .then(function(data) {
-    console.log(data);
+  .then(function (data) {
+    //console.log(data.features);
 
     // Generate summary stats
     // Number of records
     let numberOfRecords = data.features.length;
     console.log("Number of records: ", numberOfRecords);
+
+    userData = data.features;
 
     // Summary Stats
     const rigDescArr = [];
@@ -58,19 +54,17 @@ d3.json(url)
     const buildDateArr = [];
     const lossDateArr = [];
 
-    // Loop through each feature in the GeoJSON data
-    data.features.forEach(function(feature) {
-      const properties = feature.properties;
 
-      rigDescArr.push(properties.RIGDESC);
-      hullDescArr.push(properties.HULLDESC);
-      shipTypeArr.push(properties.SHIPTYPEDE);
-      countryArr.push(properties.COUNTRY);
-      buildDateArr.push(properties.BUILDDATE);
-      lossDateArr.push(properties.LOSSDATE);
+    userData.forEach((userData) => {
+      //console.log(userData.properties);
+
+      rigDescArr.push(userData.properties.RIGDESC);
+      hullDescArr.push(userData.properties.HULLDESC);
+      shipTypeArr.push(userData.properties.SHIPTYPEDE);
+      countryArr.push(userData.properties.COUNTRY);
+      buildDateArr.push(userData.properties.BUILDDATE);
+      lossDateArr.push(userData.properties.LOSSDATE);
     });
-
-    // Log the arrays for verification
     console.log("RIGDESC Array:", rigDescArr);
     console.log("HULLDESC Array:", hullDescArr);
     console.log("SHIPTYPEDE Array:", shipTypeArr);
@@ -78,60 +72,164 @@ d3.json(url)
     console.log("BUILDDATE Array:", buildDateArr);
     console.log("LOSSDATE Array:", lossDateArr);
 
-  // Create a marker layer
-  let markerLayer = L.geoJSON(data, {
-    pointToLayer: function(feature, latlng) {
-      const rigDesc = feature.properties.RIGDESC;
-      const iconUrl = iconUrls[rigDesc] || defaultIconUrl;
 
-      return L.marker(latlng, {
-        icon: L.icon({
-          iconUrl: iconUrl,
-          iconSize: [38, 38],
-          iconAnchor: [19, 38],
-          popupAnchor: [0, -38],
-        }),
-      });
-    },
-      onEachFeature: function(feature, layer) {
+    let obj = {};
+
+    countryArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+
+
+    console.log("obj: ", obj);
+    console.log(countryArr);
+
+    keyData = Object.keys(obj);
+    valueData = Object.values(obj);
+
+    /* keyData.forEach(key => {
+      if (key != ' '){
+        console.log("name ", key)
+      } else {
+        //console.log("empty ", key)
+        key = 'Unknown'
+        console.log("empty ", key)
+      }
+      
+    })
+*/
+
+    /* keyData.forEach(key => {
+      if (key != ' '){
+        console.log("name ", key)
+      } else {
+        Object.assign(keyData, {'unknown': keyData[' ']})
+        //delete keyData[' '];
+      }
+    })
+    console.log(keyData, valueData);  */
+
+    /* Object.keys(obj).forEach(key => {
+      if (obj[key] === null){
+        console.log("null")
+      } else {
+        console.log (obj[key])
+      }
+    }) */
+    /* function manageAbsentKey(keyData) {
+      keyData.forEach(key => {
+        if (key === ' ') {
+          //console.log("null");
+          key = 'unknown'
+        } else {
+          //console.log (key)
+        }
+      })
+    }
+    result = manageAbsentKey(keyData);
+
+    console.log(result); */
+
+    let plotData = [{
+      x: keyData,
+      y: valueData,
+      type: "bar"
+    }]
+
+    let layout = {
+      title: "Shipwrecks by Country of Origin",
+
+    }
+
+    //Plotly.newPlot("plot", plotData, layout);
+    Plotly.newPlot("plot", plotData, layout);
+
+    let btnCountry = d3.select("#btnShipwreckCountry");
+
+    btnCountry.on('click', function () {
+
+      console.log("btnShipwreckCountry");
+
+
+
+      let plotData = [{
+        x: keyData,
+        y: valueData,
+        type: "bar"
+      }]
+
+      let layout = {
+        title: "Shipwrecks by Country of Origin",
+
+      }
+      Plotly.update("plot", plotData, layout);
+    })
+
+  })
+
+
+
+
+/* // Loop through each feature in the GeoJSON data
+data.features.properties.forEach(function (data) {
+  const properties = data;
+  console.log(properties);
+
+  rigDescArr.push(properties.RIGDESC);
+  hullDescArr.push(properties.HULLDESC);
+  shipTypeArr.push(properties.SHIPTYPEDE);
+  countryArr.push(properties.COUNTRY);
+  buildDateArr.push(properties.BUILDDATE);
+  lossDateArr.push(properties.LOSSDATE);
+});
+
+// Log the arrays for verification
+console.log("RIGDESC Array:", rigDescArr);
+console.log("HULLDESC Array:", hullDescArr);
+console.log("SHIPTYPEDE Array:", shipTypeArr);
+console.log("COUNTRY Array:", countryArr);
+console.log("BUILDDATE Array:", buildDateArr);
+console.log("LOSSDATE Array:", lossDateArr);
+*/
+/*     // Create a marker layer
+    let markerLayer = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        const rigDesc = feature.properties.RIGDESC;
+        const iconUrl = iconUrls[rigDesc] || defaultIconUrl;
+
+        return L.marker(latlng, {
+          icon: L.icon({
+            iconUrl: iconUrl,
+            iconSize: [38, 38],
+            iconAnchor: [19, 38],
+            popupAnchor: [0, -38],
+          }),
+        });
+      },
+      onEachFeature: function (feature, layer) {
         // Bind popup content to each marker
         const popupContent = `<strong>Wreck Name:</strong> ${feature.properties.WRECKNAME}`;
         layer.bindPopup(popupContent);
 
-        // Add click event listener to populate story box
-        layer.on("click", function() {
+        // Add click event listener to populate story box and zoom to the marker
+        function onClickHandler() {
           populateStoryBox(feature.properties);
-        });
+          myMap.flyTo(layer.getLatLng(), 8); // Adjust the zoom level as needed
+        }
+
+        function onClickOffHandler() {
+          myMap.flyTo(layer.getLatLng(-32.8385, 137.5724), 5); // Adjust the zoom level as needed
+          layer.off("click", onClickOffHandler);
+          //layer.on("click", onClickHandler);
+        }
+
+        layer.on("click", onClickHandler);
+        myMap.on("click", onClickOffHandler);
       }
     });
 
     // Add the marker layer to the map
     markerLayer.addTo(myMap);
-  });
-
-  var shipIcon;
-  if (feature.properties.RIGDESC === "Brig") {
-    new ShipIcon ({iconUrl: 'static/images/ship.png'})
-  } else {
-    new ShipIcon ({iconUrl: 'static/images/ship.png'})
-  }
-
-
-
-
-  // Custom icon
-  var ShipIcon = L.Icon.extend({
-    options:{
-      iconSize: [38, 38], // size of the icon
-      iconAnchor: [19, 38], // point of the icon which will correspond to marker's location
-      popupAnchor: [0, -38] // point from which the popup should open relative to the iconAnchor
-    }
-  });
-
-  L.icon = function (options) {
-    return new L.Icon(options);
-  };    
-
+  }); */
+/*
 // Function to populate the story box
 function populateStoryBox(properties) {
   const storyBox = document.getElementById("story-box");
@@ -147,3 +245,74 @@ function populateStoryBox(properties) {
       <p><strong>Rig Description:</strong> ${properties.RIGDESC}</p>
     `;
 }
+
+var popup = L.popup()
+  .setLatLng([-34.9275, 138.60])
+  .setContent("Adelaide.")
+  .openOn(myMap);
+
+// Use D3 to read in samples.json
+d3.json(url).then((data) => {
+  // Select the dropdown menu with id "selDataset"
+  var dropdownContainer = d3.select("#selDataset");
+
+  // Get unique RIGDESC values
+  var rigDescValues = data.map(function (feature) {
+    return feature.properties.RIGDESC;
+  });
+
+  // Get distinct RIGDESC values
+  var uniqueRigDescValues = [...new Set(rigDescValues)];
+
+  // Add each name as an option to the dropdown menu
+  dropdownContainer
+    .selectAll("option")
+    .data(uniqueRigDescValues)
+    .enter()
+    .append("option")
+    .text(d => d)
+    .attr("value", d => d);
+
+  // Handle dropdown change event
+  dropdownContainer.on("change", function () {
+    var selectedRigDesc = this.value;
+    updatePlots(selectedRigDesc, data);
+  });
+
+  // Initial update with first sample
+  var firstSample = uniqueRigDescValues[0];
+  updatePlots(firstSample, data);
+
+  // create Analytics
+
+  
+
+
+});
+
+// Update plots function
+function updatePlots(selectedRigDesc, data) {
+  // Add your code to update the plots based on the selected RIGDESC value
+  console.log("Selected RIGDESC:", selectedRigDesc);
+
+};
+
+// Create a legend control.
+let legend = L.control({ position: 'bottomright' });
+
+legend.onAdd = function (map) {
+  var div = L.DomUtil.create('div', 'info legend');
+  div.innerHTML += '<h4>Ships</h4>';
+  ships = ["Brigantine", "Cutter", "Dandy", "Ketch", "Lugger", "Schooner", "Sloop", "Yawl", "Barque", "Ship", "Snow"]
+  labels = ['static/images/brigantine.png', 'static/images/cutter.png', 'static/images/dandy.png', 'static/images/Ketch.png', 'static/images/lugger.png', 'static/images/Schooner.png', 'static/images/Sloop.png', 'static/images/yawl.png', 'static/images/barque.png', 'static/images/ship.png', 'static/images/Snow.png']
+  // loop through our ships and generate a label with their png for each ship
+  for (var i = 0; i < ships.length; i++) {
+    div.innerHTML +=
+      (" <img src=" + labels[i] + " height='20' width='20'>") + ships[i] + '<br>';
+  }
+  return div;
+};
+
+legend.addTo(myMap);
+;
+ */
