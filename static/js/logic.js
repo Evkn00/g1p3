@@ -1,4 +1,4 @@
-// Define the icon URLs and default icon URL (customize as needed)
+// Define the icon URLs and default icon URL
 const iconUrls = {
     Brig: 'static/images/Brig.png',
     Brigantine: 'static/images/brigantine.png',
@@ -13,8 +13,6 @@ const iconUrls = {
     Dandy: 'static/images/dandy.png',
     Ship: 'static/images/ship.png'
 };
-
-// Create a default icon URL for unknown RIGDESC values
 const defaultIconUrl = 'static/images/ship.png';
 
 // Initialize the map
@@ -47,11 +45,11 @@ function createMarkerLayer(data) {
         // Add click event listener to populate story box and zoom to the marker
         function onClickHandler() {
           populateStoryBox(feature.properties);
-          myMap.flyTo(layer.getLatLng(), 8); // Adjust the zoom level as needed
+          myMap.flyTo(layer.getLatLng(), 8);
         }
   
         function onClickOffHandler() {
-          myMap.flyTo([-30.8, 130.9], 5); // Adjust the zoom level as needed
+          myMap.flyTo([-30.8, 130.9], 5);
           layer.off("click", onClickOffHandler);
         }
   
@@ -60,16 +58,12 @@ function createMarkerLayer(data) {
       },
     });
   }  
-
-
   
   // Use D3.js to load the data
   const url = 'http://127.0.0.1:5000/documents'; // URL for Flask API
   d3.json(url)
     .then(function(data) {
-      // Add the data variable to be accessible in other functions
-      // Note: In a real application, you might want to use a different method to pass data between functions
-      window.data = data;
+      window.data = data; //makes data readable throughout code
       console.log(data);
 
       // Pretty map set
@@ -93,18 +87,18 @@ function createMarkerLayer(data) {
       const buildDateArr = [];
       const lossDateArr = [];
 
-// calculate the first and last year of shipwrecks
-const lossDates = data.map((feature) => parseInt(feature.properties.LOSSDATE));
+      // calculate the first and last year of shipwrecks
+      const lossDates = data.map((feature) => parseInt(feature.properties.LOSSDATE));
 
-// Filter out the 0 values from the lossDates array
-const nonZeroLossDates = lossDates.filter((year) => year !== 0);
+      // Filter out the 0 values from the lossDates array
+      const nonZeroLossDates = lossDates.filter((year) => year !== 0);
 
-// Find the minimum year from the nonZeroLossDates array
-const minYear = Math.min(...nonZeroLossDates);
-const maxYear = Math.max(...lossDates);
+      // Find the minimum year from the nonZeroLossDates array
+      const minYear = Math.min(...nonZeroLossDates);
+      const maxYear = Math.max(...lossDates);
 
-console.log("Minimum Year:", minYear);
-console.log("Maximum Year:", maxYear);
+      console.log("Minimum Year:", minYear);
+      console.log("Maximum Year:", maxYear);
   
       // Loop through each feature in the GeoJSON data
       data.forEach(function(feature) {
@@ -144,7 +138,7 @@ console.log("Maximum Year:", maxYear);
   
     // Check if "All" is selected
     if (selectedRigDesc === "All") {
-      // Show all ships (remove any existing filter)
+      // Show all ships
       markerLayer.clearLayers(); // Clear all existing markers
       markerLayer = createMarkerLayer(data); // Add all markers again
     } else {
@@ -227,7 +221,7 @@ function createLegend() {
   
     // Check if "All" is selected
     if (selectedRigDesc === 'All' || selectedRigDesc === null) {
-      // Show all ships (remove any existing filter)
+      // Show all ships
       markerLayer.clearLayers(); // Clear all existing markers
       markerLayer = createMarkerLayer(data); // Add all markers again
     } else {
@@ -244,5 +238,4 @@ function createLegend() {
     // Add the new marker layer to the map
     markerLayer.addTo(myMap);
   }
-
 });
