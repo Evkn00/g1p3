@@ -5,11 +5,6 @@ body {
   color: white; /* Set text color to white for the whole page */
 }
 
-.jumbotron {
-/*   background-color: rgba(0, 0, 0, 0.5); /* Set the jumbotron background to semi-transparent black */
-   background-color: #f4511e;
-}
-
 #charts {
   color: white; /* Set text color to white for elements with ID "charts" */
 }

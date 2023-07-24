@@ -8,4 +8,7 @@ Update 16/07/2023
 - style.css - main file styling
 - data/TOPO_Shipwrecks_GDA2020.geojson - geojson data file. Unfortunately the datasource does not have a live version, so can only be downloaded as .zip.
 - index.html - html file for display.
+- Images folder - includes icons for map and background image.
+- Superseeded folder - old version kept just in case. <DELETE>
+
 
