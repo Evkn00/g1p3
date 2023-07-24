@@ -1,36 +1,25 @@
-
-html, body {
-  height: 100%;
-  width:100%
-  margin: 0;
-  padding: 0;
+/* Add custom CSS styles here */
+body {
+  background-size: cover;
+  background-position: center;
+  color: white; /* Set text color to white for the whole page */
 }
 
 .jumbotron {
-  height: 5vh;
-  margin-bottom: 20px;
-  border-radius:10px;
-  color: white;
+/*   background-color: rgba(0, 0, 0, 0.5); /* Set the jumbotron background to semi-transparent black */
+   background-color: #f4511e;
 }
 
-
-
-
-.map {
-  margin-right:5px;
-  height: 55vh;
-  width: 75%;
+#charts {
+  color: white; /* Set text color to white for elements with ID "charts" */
 }
 
 #story-box {
-  width: 25%;
-  height: 55vh;
-  float: left;
-  background-color: #e4d1d1;
   padding: 20px;
   box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
- }
+  color: white; /* Set text color to white for elements with ID "story-box" */
+}
 
 #wreck-name {
   font-size: 24px;
@@ -53,14 +42,14 @@ html, body {
   font-weight: normal;
 }
 
-.centered {
-  float: none;
-  margin-left: auto;
-  margin-right: auto;
+/* Additional style for the charts box */
+.charts {
+  color: white;
 }
 
-.row {
-  padding-bottom:5px;
-  padding-left:5px;
+/* Add a left margin to the map box */
+#map {
+  height: 100%;
+  width: 100%;
+  margin-left: 20px; /* Adjust the value to control the gap size */
 }
-

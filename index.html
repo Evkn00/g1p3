@@ -1,60 +1,74 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Map Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Import Leaflet.js -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <!--Import Jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script
-  <!-- Import Boostrap-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
->
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>South Australian Shipwrecks</title>
+
+  <!-- Style Sheet-->
+  <link rel="stylesheet" href="static/css/style.css" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   
   <!-- Import D3.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
 
-  <!-- Import local CSS file -->
-  <link rel="stylesheet" href="static/css/style.css" />
+  <!-- Import Leaflet.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 </head>
-<body>
-  
-  <div class="jumbotron jumbotron-fluid" style="height:15vh; background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp")>
-    <div class="container">
-      <h1 class="display-4">South Australian Shipwrecks</h1>
-      <p class="lead">Data on 705 shipwrecks between ###ADD DATES HERE###.</p>
+
+<body style="background-image: url('static/images/etienne-lehuede-IUBQKMEU9yg-unsplash.jpg')";>
+  <div class="container-fluid">
+    <!-- Jumbotron -->
+    
+    <div class="jumbotron jumbotron-fluid" style="height: 15vh; background-size: cover; background-position: center;">
+        <div class="container">
+            <h1 class="display-5">South Australian Shipwrecks</h1>
+            <p class="lead">Data on 705 shipwrecks between 1837 - 2002.</p>
+        </div>
     </div>
-  </div>   
-</div>
-</div>
-</div>   
-      <div class="row" style="width: 100%">
-            <div class="col-8 map" id="map"></div>
-            <div class="col-3" id="story-box">
-              <h2 id="wreck-name"></h2>
-              <div id="story-content">
-                <p><strong>Loss Date:</strong> <span id="loss-date"></span></p>
-                <p><strong>Loss Location:</strong> <span id="loss-location"></span></p>
-                <p><strong>Loss Cause:</strong> <spa nid="loss-cause"></span></p>
-                <p><strong>Build Date:</strong> <span id="build-date"></span></p>
-                <p><strong>Hull Description:</strong> <span id="hull-desc"></span></p>
-                <p><strong>Port Built:</strong> <span id="port-built"></span></p>
-                <p><strong>Rig Description:</strong> <span id="rig-desc"></span></p>
-                <p><strong>Wreck Number:</strong> <span id="wreck-number"></span></p>
-              </div>
-              </div>
-            </div>
-              </div>
-              <div class="row" style="width:100%">
-                <div class="col-11 " style="background-color: rgb(239, 243, 44);   height: 25vh;">
-                  <h1>David put your charts here!</h1>
-          </div>
+
+    <!-- 2nd Row -->
+    <div class="row" style="height: 50vh;">
+      <!-- First Box (75% width) -->
+      <div class="col-md-9">
+        <div class="map" id="map"></div>
+      </div>
+
+      <!-- Second Box (25% width) -->
+      <div class="col-md-3" id="story-box">
+        <h2 id="wreck-name"></h2>
+        <p><strong>Loss Date:</strong> <span id="loss-date"></span></p>
+        <p><strong>Loss Location:</strong> <span id="loss-location"></span></p>
+        <p><strong>Loss Cause:</strong> <span id="loss-cause"></span></p>
+        <p><strong>Build Date:</strong> <span id="build-date"></span></p>
+        <p><strong>Hull Description:</strong> <span id="hull-desc"></span></p>
+        <p><strong>Port Built:</strong> <span id="port-built"></span></p>
+        <p><strong>Rig Description:</strong> <span id="rig-desc"></span></p>
+        <p><strong>Wreck Number:</strong> <span id="wreck-number"></span></p>
+      </div>
     </div>
+
+    <!-- 3rd Row -->
+    <div class="row" style="height: 30vh;">
+      <!-- Full-width Box -->
+      <div class="col charts">
+        <h2>Graph box</h2>
+        <p>Graphs Go Here!.</p>
+      </div>
+    </div>
+
   </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Import logic.js -->
   <script src="static/js/logic.js"></script>
 </body>
+
 </html>
