@@ -20,8 +20,13 @@
   <!-- Import plotly -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+
+  
+  <script src="dist/rangeslider.umd.min.js"></script>
+
   <!-- Import local CSS file -->
   <link rel="stylesheet" href="static/css/style.css" />
+  <link rel="stylesheet" href="dist/style.css" />
 </head>
 
 <body>
@@ -62,9 +67,19 @@
 
       </div>
       <div id="graphPanel">
-        <div id="plot"></div>
+        <div id="plot"></div><br>
+        <div id="slider">
+          
+        </div>
       </div>
     </div>
+    <!--
+    <script>
+      rangeSlider(document.querySelector('#slider'));
+    </script>
+    -->
+    
+    
 
     <!-- Import logic.js -->
     <script src="static/js/logic.js"></script>

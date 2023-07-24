@@ -50,6 +50,8 @@ d3.json(url)
 
     userData = data.features;
 
+    //console.log("userData: ", userData)
+
     // Summary Stats
     const rigDescArr = [];
     const hullDescArr = [];
@@ -161,7 +163,10 @@ d3.json(url)
       let plotData = [{
         x: keyData,
         y: valueData,
-        type: "bar"
+        type: "bar",
+        marker: {
+          color: "orange"
+        }
       }]
 
       let layout = {
@@ -246,6 +251,15 @@ d3.json(url)
       //console.log("button clicked")
 
       RigDescPlot(rigDescArr);
+    });
+
+    rangeSlider(document.querySelector('#slider'), {
+      min: 0,
+      max: 100,
+      value: [10, 20],
+      onInput: function(valueSet){
+        console.log(valueSet);
+      }
     });
 
   })
