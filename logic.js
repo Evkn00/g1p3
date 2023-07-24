@@ -70,13 +70,53 @@ d3.json(url)
       countryArr.push(userData.properties.COUNTRY);
       buildDateArr.push(userData.properties.BUILDDATE);
       lossDateArr.push(userData.properties.LOSSDATE);
+
     });
-    console.log("RIGDESC Array:", rigDescArr);
+
+    // create a mainObj that includes all individual data arrays, so that dates etc can be
+    // consistently formatted and sorted
+
+    mainObj = {
+      rigDescArr: [],
+      hullDescArr: [],
+      shipTypeArr: [],
+      countryArr: [],
+      buildDateArr: [],
+      buildDateYearArr: [],
+      lossDateArr: [],
+      lossDateYearArr: []
+    };
+
+    mainObj.rigDescArr.push(rigDescArr);
+    mainObj.hullDescArr.push(hullDescArr);
+    mainObj.shipTypeArr.push(shipTypeArr);
+    mainObj.countryArr.push(countryArr);
+    mainObj.buildDateArr.push(buildDateArr);
+    mainObj.lossDateArr.push(lossDateArr);
+
+    let buildDateYearArr = getDateByYearOnly(buildDateArr);
+    let lossDateYearArr = getDateByYearOnly(lossDateArr);
+
+    mainObj.buildDateYearArr.push(buildDateYearArr);
+    mainObj.lossDateYearArr.push(lossDateYearArr);
+
+
+
+
+    console.log("mainObj:", mainObj);
+
+
+
+
+
+
+    /* console.log("RIGDESC Array:", rigDescArr);
     console.log("HULLDESC Array:", hullDescArr);
     console.log("SHIPTYPEDE Array:", shipTypeArr);
     console.log("COUNTRY Array:", countryArr);
     console.log("BUILDDATE Array:", buildDateArr);
     console.log("LOSSDATE Array:", lossDateArr);
+    console.log("mainArray:", mainArray); */
 
 
     function CountryPlot(countryArr) {
@@ -103,6 +143,12 @@ d3.json(url)
 
       let layout = {
         title: "Shipwrecks by Country of Origin",
+        xaxis: {
+          title: "Country of Origin"
+        },
+        yaxis: {
+          title: "Number of Shipwrecks"
+        }
 
       }
 
@@ -136,6 +182,7 @@ d3.json(url)
 
       let layout = {
         title: "Shipwrecks by Hull Type",
+
 
       }
 
@@ -171,7 +218,12 @@ d3.json(url)
 
       let layout = {
         title: "Shipwrecks by Rigging Type",
-
+        xaxis: {
+          title: "Type of Rigging"
+        },
+        yaxis: {
+          title: "Number of Shipwrecks"
+        }
       }
 
       //Plotly.newPlot("plot", plotData, layout);
@@ -209,47 +261,57 @@ d3.json(url)
 
       let layout = {
         title: "Shipwrecks by Date of Occurrence",
-
+        xaxis: {
+          title: "Year ShipWreck Occurred"
+        },
+        yaxis: {
+          title: "Number of Shipwrecks"
+        }
       }
 
-      //Plotly.newPlot("plot", plotData, layout);
       Plotly.newPlot("plot", plotData, layout);
-
-      // }
-
-      //console.log("year of loss array", lossYearArray)
-
-      //console.log("obj: ", obj);
-      //console.log(lossDateArr);
-
-      //keyData = Object.keys(obj);
-      //valueData = Object.values(obj);
-
 
     };
 
-    d3.select("#btnShipwreckCountry").on("click", function () {
-      console.log("button clicked")
+    function getDateByYearOnly(array) {
 
+      //console.log("array:", array);
+
+      yearOnlyArray = [];
+
+      array.forEach((row) => {
+
+        //console.log("test")
+
+        let yearValue = row.slice(Math.max(row.length - 4, 0));
+
+        yearOnlyArray.push(yearValue);
+
+
+
+      })
+
+      console.log(yearOnlyArray);
+
+      return yearOnlyArray;
+
+    }
+
+    // set button event listeners for different graph displays
+
+    d3.select("#btnShipwreckCountry").on("click", function () {
       CountryPlot(countryArr);
     });
 
     d3.select("#btnShipwreckHull").on("click", function () {
-      console.log("button clicked")
-
       HullPlot(hullDescArr);
     });
 
     d3.select("#btnShipwreckDate").on("click", function () {
-      //console.log("button clicked");
-      //console.log(lossDateArr)
-
       ShipwreckDatePlot(lossDateArr);
     });
 
     d3.select("#btnShipwreckRig").on("click", function () {
-      //console.log("button clicked")
-
       RigDescPlot(rigDescArr);
     });
 
@@ -257,10 +319,11 @@ d3.json(url)
       min: 0,
       max: 100,
       value: [10, 20],
-      onInput: function(valueSet){
+      onInput: function (valueSet) {
         console.log(valueSet);
       }
     });
+
 
   })
 
