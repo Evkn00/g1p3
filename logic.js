@@ -126,9 +126,10 @@ d3.json(url)
       valueData = Object.values(obj);
 
       let plotData = [{
-        x: keyData,
-        y: valueData,
-        type: "bar"
+        type: "pie",
+        labels: keyData,
+        values: valueData
+
       }]
 
       let layout = {
