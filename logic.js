@@ -69,15 +69,15 @@ d3.json(url)
       buildDateArr.push(userData.properties.BUILDDATE);
       lossDateArr.push(userData.properties.LOSSDATE);
     });
-    /* console.log("RIGDESC Array:", rigDescArr);
+    console.log("RIGDESC Array:", rigDescArr);
     console.log("HULLDESC Array:", hullDescArr);
     console.log("SHIPTYPEDE Array:", shipTypeArr);
     console.log("COUNTRY Array:", countryArr);
     console.log("BUILDDATE Array:", buildDateArr);
-    console.log("LOSSDATE Array:", lossDateArr); */
+    console.log("LOSSDATE Array:", lossDateArr);
 
 
-    function btnCountryPlot(countryArr) {
+    function CountryPlot(countryArr) {
 
       console.log(countryArr)
 
@@ -109,7 +109,7 @@ d3.json(url)
 
     };
 
-    function btnHullPlot(hullDescArr) {
+    function HullPlot(hullDescArr) {
 
       console.log(hullDescArr)
 
@@ -140,9 +140,41 @@ d3.json(url)
       Plotly.newPlot("plot", plotData, layout);
 
     };
-    
 
-    function btnShipwreckDatePlot(lossDateArr) {
+    function RigDescPlot(rigDescArr) {
+
+      console.log(rigDescArr)
+
+      let obj = {};
+
+      rigDescArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+
+
+      console.log("obj: ", obj);
+      console.log(rigDescArr);
+
+      keyData = Object.keys(obj);
+      valueData = Object.values(obj);
+
+      let plotData = [{
+        x: keyData,
+        y: valueData,
+        type: "bar"
+      }]
+
+      let layout = {
+        title: "Shipwrecks by Rigging Type",
+
+      }
+
+      //Plotly.newPlot("plot", plotData, layout);
+      Plotly.newPlot("plot", plotData, layout);
+
+    };
+
+
+    function ShipwreckDatePlot(lossDateArr) {
 
       //console.log(lossDateArr)
 
@@ -156,7 +188,7 @@ d3.json(url)
 
         //console.log("test")
 
-        let yearValue = row.slice(Math.max(row.length -4, 0));
+        let yearValue = row.slice(Math.max(row.length - 4, 0));
 
         console.log(yearValue)
 
@@ -177,7 +209,7 @@ d3.json(url)
       //Plotly.newPlot("plot", plotData, layout);
       Plotly.newPlot("plot", plotData, layout);
 
-   // }
+      // }
 
       //console.log("year of loss array", lossYearArray)
 
@@ -187,26 +219,32 @@ d3.json(url)
       //keyData = Object.keys(obj);
       //valueData = Object.values(obj);
 
-      
+
     };
 
     d3.select("#btnShipwreckCountry").on("click", function () {
       console.log("button clicked")
 
-      btnCountryPlot(countryArr);
+      CountryPlot(countryArr);
     });
 
     d3.select("#btnShipwreckHull").on("click", function () {
       console.log("button clicked")
 
-      btnHullPlot(hullDescArr);
+      HullPlot(hullDescArr);
     });
 
     d3.select("#btnShipwreckDate").on("click", function () {
       //console.log("button clicked");
       //console.log(lossDateArr)
 
-      btnShipwreckDatePlot(lossDateArr);
+      ShipwreckDatePlot(lossDateArr);
+    });
+
+    d3.select("#btnShipwreckRig").on("click", function () {
+      //console.log("button clicked")
+
+      RigDescPlot(rigDescArr);
     });
 
   })
