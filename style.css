@@ -1,0 +1,89 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.jumbotron {
+  height: 5vh;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.map {
+  margin-right: 5px;
+  height: 55vh;
+  width: 75%;
+}
+
+#story-box {
+  width: 25%;
+  height: 55vh;
+  float: left;
+  background-color: #e4d1d1;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#wreck-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#story-content {
+  margin-top: 10px;
+}
+
+#story-content p {
+  margin-bottom: 10px;
+}
+
+#story-content strong {
+  font-weight: bold;
+}
+
+#story-content span {
+  font-weight: normal;
+}
+
+.centered {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  padding-bottom: 5px;
+  padding-left: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.analysisHeading {
+  height: 25vh;
+  background-color: rgb(110, 185, 239);
+  text-align:center;
+}
+
+.btn {
+  color: blue;
+  background-color: rgb(0, 208, 255);
+  margin: 5px;
+  width: 220px;
+  height: 50px
+}
+#analysisButtonPanel {
+  width: 240px;
+  height: 400px
+}
+#graphPanel {
+  width: 800px;
+  height: 640px;
+}
+
+#btnHeading {
+  font-size: 20px;
+}
