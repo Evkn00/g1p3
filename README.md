@@ -15,3 +15,6 @@ https://stackoverflow.com/questions/6120931/how-to-count-certain-elements-in-arr
 https://www.tutorialspoint.com/d3js/d3js_graphs.htm
 https://www.freecodecamp.org/news/javascript-foreach-how-to-loop-through-an-array-in-js/
 https://www.geeksforgeeks.org/count-occurrences-of-all-items-in-an-array-in-javascript/
+
+# slice year only from date of loss array
+https://stackoverflow.com/questions/6473858/how-do-i-get-the-last-5-elements-excluding-the-first-element-from-an-array
