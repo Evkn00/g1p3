@@ -234,15 +234,6 @@ slider.noUiSlider.on("update", function (values) {
   endYear = newMaxYear;
 }); 
 
-/* document.getElementById("refresh-button").addEventListener("click", function () {
-  let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;// rebuild URL
-  // Clear the existing markerLayer from the map
-  console.log(`startYear: ${startYear}, endYear: ${endYear}`);
-  myMap.eachLayer((layer) => {
-    layer.remove();
-  }); */
-
-
 // Function to clear the map and recreate it
 function refreshMap() {
   myMap.eachLayer((layer) => {
