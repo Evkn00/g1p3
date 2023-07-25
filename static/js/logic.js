@@ -64,8 +64,8 @@ function createMarkerLayer(data) {
 }
 
 // Use D3.js to load the data
-//const url = 'http://127.0.0.1:5000/documents'; // URL for Flask API
-const url = '/data/project3.json'; // URL for Flask API
+let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;// URL for Flask API
+//const url = '/data/project3.json'; // URL for Flask API
 d3.json(url)
   .then(function (data) {
     window.data = data; //makes data readable throughout code
