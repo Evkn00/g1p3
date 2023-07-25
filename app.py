@@ -49,6 +49,31 @@ def get_ship_documents(ship_type):
 
     return jsonify(results)
 
+# Route to filter by year
+@app.route('/documents/<int:start_year>/<int:end_year>', methods=['GET'])
+@cross_origin()
+def getYearDocuments(start_year, end_year):
+    # Modify the query to filter by build date and loss date
+    ship_documents = list(collection.find({
+        "$and": [
+            {"properties.LOSSDATE": {"$gte": start_year}},
+            {"properties.LOSSDATE": {"$lte": end_year}}
+        ]
+    }))
+
+    results = []
+    # Loop through the returned documents and append to results
+    for document in ship_documents:
+        # Convert MongoDB document to GeoJSON format
+        geojson = {
+            "type": "Feature",
+            "geometry": document['geometry'],
+            "properties": document['properties']
+        }
+        results.append(geojson)
+
+    return jsonify(results)
+
 #Launch the app 
 if __name__ == '__main__':
     app.run(debug=True)
