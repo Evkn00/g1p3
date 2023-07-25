@@ -1,103 +1,29 @@
-// Define the icon URLs and default icon URL
-const iconUrls = {
-    Brig: 'static/images/Brig.png',
-    Brigantine: 'static/images/brigantine.png',
-    Barque: 'static/images/barque.png',
-    Snow: 'static/images/Snow.png',
-    Ketch: 'static/images/Ketch.png',
-    Schooner: 'static/images/Schooner.png',
-    Cutter: 'static/images/cutter.png',
-    Lugger: 'static/images/lugger.png',
-    Sloop: 'static/images/Sloop.png',
-    Yawl: 'static/images/yawl.png',
-    Dandy: 'static/images/dandy.png',
-    Ship: 'static/images/ship.png'
-};
-const defaultIconUrl = 'static/images/ship.png';
+//Define initial Values
+  //set default years
+  let startYear = 1
+  let endYear = 2030
+  let markerLayer;
 
-//set default years
-let startYear = 1
-let endYear = 2030
+  // Create data URL
+  let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;// URL for Flask API
 
 // Initialize the map
-let myMap = L.map("map", {
+  let myMap = L.map("map", {
     center: [-30.8, 130.9],
     zoom: 5
-});
+  });
 
-// Function to create marker layer
-function createMarkerLayer(data) {
-    return L.geoJSON(data, {
-      pointToLayer: function (feature, latlng) {
-        const rigDesc = feature.properties.RIGDESC;
-        const iconUrl = iconUrls[rigDesc] || defaultIconUrl;
-  
-        return L.marker(latlng, {
-          icon: L.icon({
-            iconUrl: iconUrl,
-            iconSize: [38, 38],
-            iconAnchor: [19, 38],
-            popupAnchor: [0, -38],
-          }),
-        });
-      },
-      onEachFeature: function (feature, layer) {
-        // Bind popup content to each marker
-        const popupContent = `<strong>Wreck Name:</strong> ${feature.properties.WRECKNAME}`;
-        layer.bindPopup(popupContent);
-  
-        // Add click event listener to populate story box and zoom to the marker
-        function onClickHandler() {
-          populateStoryBox(feature.properties);
-          myMap.flyTo(layer.getLatLng(), 8);
-        }
-  
-        function onClickOffHandler() {
-          myMap.flyTo([-30.8, 130.9], 5);
-          layer.off("click", onClickOffHandler);
-        }
-  
-        layer.on("click", onClickHandler);
-        myMap.on("click", onClickOffHandler);
-      },
-    });
-  }  
-
-  
-  
-  
-  // Use D3.js to load the data
-  let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;// URL for Flask API
-  d3.json(url)
+function makeMap(xxx) {  
+  d3.json(xxx)
     .then(function(data) {
       window.data = data; //makes data readable throughout code
       console.log(data);
 
-      // Pretty map set (default, no street names)
-      const defaultTileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        subdomains: 'abcd',
-        minZoom: 1,
-        maxZoom: 16,
-      }).addTo(myMap);
-
-
-      // Add 2nd tile layer (ugly, streetnames, etc)
-      const secondTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-      maxZoom: 20,
-      attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          });
-
-      // layer list
-      const baseLayers = {
-        'Pirate Map': defaultTileLayer,
-        'Boring Map': secondTileLayer,
-      };
+      defaultTileLayer.addTo(myMap);
       
       // Create layer control
       L.control.layers(baseLayers).addTo(myMap);
-
-
+      
       // Generate summary stats
       // Number of records
       let numberOfRecords = data.length;
@@ -144,8 +70,8 @@ function createMarkerLayer(data) {
       console.log("BUILDDATE Array:", buildDateArr);
       console.log("LOSSDATE Array:", lossDateArr);
 
-    // Initialize the marker layer with all ships
-    let markerLayer = createMarkerLayer(data);
+      // Initialize the marker layer with all ships
+      let markerLayer = createMarkerLayer(data);
 
     // Add the marker layer to the map
     markerLayer.addTo(myMap);
@@ -153,8 +79,11 @@ function createMarkerLayer(data) {
     // Get unique RIGDESC values
     var rigDescValues = data.map(function(feature) {
     return feature.properties.RIGDESC;
+    return markerLayer;
     });
-    
+  
+
+
     // Function to update the map with the selected ship type
     function updateMap(selectedRigDesc) {
     // Trim the selectedRigDesc to remove leading/trailing whitespaces
@@ -179,6 +108,7 @@ function createMarkerLayer(data) {
     markerLayer.addTo(myMap);
   };
 
+
 // Function to populate the story box
 window.populateStoryBox = function(properties) {
     const storyBox = document.getElementById("story-box");
@@ -195,7 +125,9 @@ window.populateStoryBox = function(properties) {
     `;
   };
 
-    
+
+
+
 // Create a legend control.
 let legend = L.control({ position: 'bottomright' });
 
@@ -262,4 +194,74 @@ function createLegend() {
     // Add the new marker layer to the map
     markerLayer.addTo(myMap);
   }
+  return markerLayer;
+});
+};
+
+
+makeMap(url)
+
+// Get references to the input fields and the slider
+const inputMin = document.getElementById("input-number-min");
+const inputMax = document.getElementById("input-number-max");
+const slider = document.getElementById("slider-date");
+let minYear = 1837
+let maxYear = 2002
+
+
+
+// Set up the slider
+noUiSlider.create(slider, {
+  start: [minYear, maxYear], // These values should be defined beforehand
+  connect: true,
+  range: {
+    min: 1837, // Replace with the appropriate minimum year
+    max: 2002, // Replace with the appropriate maximum year
+  },
+  step: 1,
+  format: {
+    to: (value) => Math.round(parseFloat(value)),
+    from: (value) => parseFloat(value),
+  },
+});
+
+// Function to update the input fields when the slider changes
+slider.noUiSlider.on("update", function (values) {
+  const [newMinYear, newMaxYear] = values.map(parseFloat);
+  inputMin.value = newMinYear;
+  inputMax.value = newMaxYear;
+  startYear = newMinYear;
+  endYear = newMaxYear;
+}); 
+
+/* document.getElementById("refresh-button").addEventListener("click", function () {
+  let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;// rebuild URL
+  // Clear the existing markerLayer from the map
+  console.log(`startYear: ${startYear}, endYear: ${endYear}`);
+  myMap.eachLayer((layer) => {
+    layer.remove();
+  }); */
+
+
+// Function to clear the map and recreate it
+function refreshMap() {
+  myMap.eachLayer((layer) => {
+    layer.remove();
+  })
+
+  // Remove the existing legend control from the map
+/*   legend.removeFrom(myMap); */
+
+  // Rebuild the data URL with the updated startYear and endYear
+  let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;
+  console.log(url)
+
+  // Recreate the map
+  makeMap(url);
+}
+
+// Add event listener to the refresh button
+document.getElementById("refresh-button").addEventListener("click", function () {
+  console.log(`startYear: ${startYear}, endYear: ${endYear}`);
+  refreshMap();
 });

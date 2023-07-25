@@ -15,6 +15,9 @@
   <!-- Import D3.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
 
+  <!-- Import nouislider CSS -->
+  <link rel="stylesheet" href="static/css/nouislider.min.css" />
+
   <!-- Import Leaflet.js -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
@@ -27,8 +30,17 @@
         <p class="lead">Data on 705 shipwrecks between 1837 - 2002.</p>
     </div>
     </div>
-
-
+<!-- Slider Container -->
+<div style="margin: 20px;">
+  <!-- Add the nouislider element -->
+  <div id="slider-date"></div>
+  <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+    <input type="number" min='1837' max='2002' id="input-number-min">
+    <input type="number" min='1837' max='2002' id="input-number-max">
+  </div>
+  <!-- Add the refresh button -->
+  <button id="refresh-button">Refresh Map</button>
+</div>
     <!-- 2nd Row -->
     <div class="row" style="height: 50vh;">
       <!-- First Box (75% width) -->
@@ -68,7 +80,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Import logic.js -->
+  <script src="static/js/nouislider.min.js"></script>
+  <script src="static/js/icons.js"></script>
+  <script src="static/js/createLegend.js"></script>
+  <script src="static/js/tileLayers.js"></script>
+  <script src="static/js/createMarkerLayer.js"></script>
   <script src="static/js/logic.js"></script>
+  
 </body>
 
 </html>
