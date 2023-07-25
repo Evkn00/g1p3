@@ -19,17 +19,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 </head>
+<!-- range slider -->
+<script src="dist/rangeslider.umd.min.js"></script>
+<link rel="stylesheet" href="dist/style.css" />
+
+<!-- Import D3.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+<!-- Import plotly -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <body style="background-image: url('static/images/etienne-lehuede-IUBQKMEU9yg-unsplash.jpg')";>
   <div class="container-fluid">
     <!-- Jumbotron -->
-    
+      
     <div class="jumbotron jumbotron-fluid" style="height: 15vh; background-size: cover; background-position: center;">
-        <div class="container">
-            <h1 class="display-5">South Australian Shipwrecks</h1>
-            <p class="lead">Data on 705 shipwrecks between 1837 - 2002.</p>
-        </div>
+      <div class="container">
+          <h1 class="display-5">South Australian Shipwrecks</h1>
+          <p class="lead">Data on 705 shipwrecks between 1837 - 2002.</p>
+      </div>
     </div>
+
+    
+  </div>
 
     <!-- 2nd Row -->
     <div class="row" style="height: 50vh;">
@@ -37,6 +48,7 @@
       <div class="col-md-9">
         <div class="map" id="map"></div>
       </div>
+    <div>
 
       <!-- Second Box (25% width) -->
       <div class="col-md-3" id="story-box">
@@ -55,13 +67,26 @@
     <!-- 3rd Row -->
     <div class="row" style="height: 30vh;">
       <!-- Full-width Box -->
-      <div class="col charts">
-        <h2>Graph box</h2>
-        <p>Graphs Go Here!.</p>
-      </div>
-    </div>
+      <!-- <div class="col-md-3"> -->
+        <!-- <h1 id="analysisHeading">Shipwreck Analysis</h1>-->
+        <div id="analysisButtonPanel">
 
-  </div>
+          <h2 id="btnHeading">Select Shipwreck Data Using Buttons Below</h2><br>
+
+          <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckCountry">By Country of Origin</button><br>
+          <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckDate">By Date of Wreck</button><br>
+          <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckHull">By Hull Type</button><br>
+          <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckRig">By Rigging Type</button><br>
+        </div>
+
+        <div id="plotContainer">
+          <div id="plot"></div>
+        </div>
+
+        <div id="sliderContainer">
+          <h2 id="sliderHeading">Slide the buttons to Select a Date Range for Shipwreck Data</h2>
+        <div id="slider"></div>
+        </div>
 
   <!-- Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

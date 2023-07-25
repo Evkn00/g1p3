@@ -2,23 +2,26 @@
 body {
   background-size: cover;
   background-position: center;
-  color: white; /* Set text color to white for the whole page */
+  color: white;
+  /* Set text color to white for the whole page */
 }
 
 .jumbotron {
-/*   background-color: rgba(0, 0, 0, 0.5); /* Set the jumbotron background to semi-transparent black */
-   background-color: #f4511e;
+  /*   background-color: rgba(0, 0, 0, 0.5); /* Set the jumbotron background to semi-transparent black */
+  background-color: #f4511e;
 }
 
 #charts {
-  color: white; /* Set text color to white for elements with ID "charts" */
+  color: white;
+  /* Set text color to white for elements with ID "charts" */
 }
 
 #story-box {
   padding: 20px;
   box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: white; /* Set text color to white for elements with ID "story-box" */
+  color: white;
+  /* Set text color to white for elements with ID "story-box" */
 }
 
 #wreck-name {
@@ -51,5 +54,53 @@ body {
 #map {
   height: 100%;
   width: 100%;
-  margin-left: 20px; /* Adjust the value to control the gap size */
+  margin-left: 20px;
+  /* Adjust the value to control the gap size */
+}
+
+/* #analysisHeading {
+  text-align: center;
+  font-size: 24px;
+  margin: 8px;
+} */
+
+#analysisButtonPanel {
+  width: 240px;
+  height: 400px;
+  margin: 14px;
+  float: left;
+}
+
+.btnAnalysis {
+  color: darkgreen;
+  background-color: white;
+  margin: 5px;
+  width: 220px;
+  height: 40px
+}
+
+
+
+#btnHeading {
+  font-size: 18px;
+  text-align: center;
+  color: white;
+}
+
+#plotContainer {
+  width: 400px;
+  height: 300px;
+  float: left;
+}
+
+#sliderContainer {
+  width: 300px;
+  height: 400px;
+  padding: 14px;
+}
+
+#sliderHeading {
+  font-size: 18px;
+  padding-bottom: 20px;
+  color: white;
 }

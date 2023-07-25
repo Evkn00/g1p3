@@ -60,7 +60,8 @@ function createMarkerLayer(data) {
   }  
   
   // Use D3.js to load the data
-  const url = 'http://127.0.0.1:5000/documents'; // URL for Flask API
+  //const url = 'http://127.0.0.1:5000/documents'; // URL for Flask API
+  const url = '/data/project3.json'; // URL for Flask API
   d3.json(url)
     .then(function(data) {
       window.data = data; //makes data readable throughout code
@@ -113,12 +114,12 @@ function createMarkerLayer(data) {
       });
   
       // Log the arrays for verification
-      console.log("RIGDESC Array:", rigDescArr);
+      /* console.log("RIGDESC Array:", rigDescArr);
       console.log("HULLDESC Array:", hullDescArr);
       console.log("SHIPTYPEDE Array:", shipTypeArr);
       console.log("COUNTRY Array:", countryArr);
       console.log("BUILDDATE Array:", buildDateArr);
-      console.log("LOSSDATE Array:", lossDateArr);
+      console.log("LOSSDATE Array:", lossDateArr); */
 
     // Initialize the marker layer with all ships
     let markerLayer = createMarkerLayer(data);
@@ -238,4 +239,189 @@ function createLegend() {
     // Add the new marker layer to the map
     markerLayer.addTo(myMap);
   }
+
+
+  function CountryPlot(countryArr) {
+
+    //console.log(countryArr)
+
+    let obj = {};
+
+    countryArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+
+
+    /* console.log("obj: ", obj);
+    console.log(countryArr); */
+
+    keyData = Object.keys(obj);
+    valueData = Object.values(obj);
+
+    let plotData = [{
+      x: keyData,
+      y: valueData,
+      type: "bar"
+    }]
+
+    let layout = {
+      autosize: false,
+      width: 400,
+      height: 300,
+      title: "Shipwrecks by Country of Origin",
+      xaxis: {
+        title: "Country of Origin",
+        tickangle: 45
+      },
+      yaxis: {
+        title: "Number of Shipwrecks"
+      }
+
+    }
+
+    //Plotly.newPlot("plot", plotData, layout);
+    Plotly.newPlot("plot", plotData, layout);
+
+  };
+
+  function ShipwreckDatePlot(lossDateArr) {
+
+    console.log("lossDateArr", lossDateArr)
+
+    let obj = {};
+
+    lossDateArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+    keyData = Object.keys(obj);
+    valueData = Object.values(obj);
+
+    //console.log(keyData);
+    //console.log(valueData);
+ 
+    let plotData = [{
+      x: valueData,
+      type: "histogram"
+    }]
+
+    let layout = {
+      autosize: false,
+      width: 400,
+      height: 300,
+      title: "Shipwrecks by Date of Occurrence",
+      xaxis: {
+        title: "Year ShipWreck Occurred",
+        tickangle: 45
+      },
+      yaxis: {
+        title: "Number of Shipwrecks"
+      }
+    }
+
+    Plotly.newPlot("plot", plotData, layout);
+
+  };
+
+  function HullPlot(hullDescArr) {
+
+    //console.log(hullDescArr)
+
+    let obj = {};
+
+    hullDescArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+
+
+    /* console.log("obj: ", obj);
+    console.log(hullDescArr); */
+
+    keyData = Object.keys(obj);
+    valueData = Object.values(obj);
+
+    let plotData = [{
+      type: "pie",
+      labels: keyData,
+      values: valueData
+
+    }]
+
+    let layout = {
+      title: "Shipwrecks by Hull Type",
+
+
+    }
+
+    //Plotly.newPlot("plot", plotData, layout);
+    Plotly.newPlot("plot", plotData, layout);
+
+  };
+
+  function RigDescPlot(rigDescArr) {
+
+    //console.log(rigDescArr)
+
+    let obj = {};
+
+    rigDescArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+
+
+    /* console.log("obj: ", obj);
+    console.log(rigDescArr); */
+
+    keyData = Object.keys(obj);
+    valueData = Object.values(obj);
+
+    let plotData = [{
+      x: keyData,
+      y: valueData,
+      type: "bar",
+      marker: {
+        color: "orange"
+      }
+    }]
+
+    let layout = {
+      autosize: false,
+      width: 400,
+      height: 300,
+      title: "Shipwrecks by Rigging Type",
+      xaxis: {
+        title: "Type of Rigging"
+      },
+      yaxis: {
+        title: "Number of Shipwrecks"
+      }
+    }
+
+    //Plotly.newPlot("plot", plotData, layout);
+    Plotly.newPlot("plot", plotData, layout);
+
+  };
+
+  d3.select("#btnShipwreckCountry").on("click", function () {
+    CountryPlot(countryArr);
+  });
+
+  d3.select("#btnShipwreckHull").on("click", function () {
+    HullPlot(hullDescArr);
+  });
+
+  d3.select("#btnShipwreckDate").on("click", function () {
+    ShipwreckDatePlot(lossDateArr);
+  });
+
+  d3.select("#btnShipwreckRig").on("click", function () {
+    RigDescPlot(rigDescArr);
+  });
+
+  rangeSlider(document.querySelector('#slider'), {
+    min: 0,
+    max: 100,
+    value: [10, 20],
+    onInput: function (valueSet) {
+      console.log(valueSet);
+    }
+  });
+
+
+
 });
