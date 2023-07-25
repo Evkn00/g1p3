@@ -125,6 +125,44 @@ d3.json(url)
     console.log("BUILDDATE Array:", buildDateArr);
     console.log("LOSSDATE Array:", lossDateArr); */
 
+    // create a mainObj that includes all individual data arrays, so that dates etc can be
+    // consistently formatted and sorted
+
+    changeDataFormat(data)
+
+    mainObj = {
+      rigDescArr: [],
+      hullDescArr: [],
+      shipTypeArr: [],
+      countryArr: [],
+      buildDateArr: [],
+      buildDateYearArr: [],
+      lossDateArr: [],
+      lossDateYearArr: []
+    };
+
+    mainObj.rigDescArr.push(rigDescArr);
+    mainObj.hullDescArr.push(hullDescArr);
+    mainObj.shipTypeArr.push(shipTypeArr);
+    mainObj.countryArr.push(countryArr);
+    mainObj.buildDateArr.push(buildDateArr);
+    mainObj.lossDateArr.push(lossDateArr);
+
+    /* let buildDateYearArr = getDateByYearOnly(buildDateArr);
+    let lossDateYearArr = getDateByYearOnly(lossDateArr);
+
+    mainObj.buildDateYearArr.push(buildDateYearArr);
+    mainObj.lossDateYearArr.push(lossDateYearArr); */
+
+
+
+
+    console.log("mainObj:", mainObj);
+
+
+
+
+
     // Initialize the marker layer with all ships
     let markerLayer = createMarkerLayer(data);
 
@@ -429,9 +467,82 @@ d3.json(url)
         //maxValDiv = document.getElementById("maxYear");
         document.getElementById("minYear").value = valueSet[0]; //minYear;
         document.getElementById("maxYear").value = valueSet[1]; //maxYear;
+
+        createDateInvervalArray(mainObj, valueSet);
+
+
+
+
+
       }
     });
 
+    // use the dates obtained from the slider to obtain a subset of the
+    // main array that is limited to the dates in question
+    // then update the graphs
+
+    /* function createDateInvervalArray(mainObj, valueSet) {
+
+      console.log("createDataIntervalArray", valueSet);
+      console.log("createDataIntervalArray", mainObj);
+
+      let minYear = valueSet[0];
+      let maxYear = valueSet[1];
+
+      let intervalLossDateArr = [];
+      let intervalCountryArr = [];
+
+      mainObj.lossDateArr[0].forEach(function(row){
+      mainObj.forEach(function(row){
+        if (row >= minYear && row <= maxYear){
+          intervalArr.push(row);
+          mainObj.COUNTRY
 
 
-  });
+        }
+
+        
+
+
+
+        //console.log("row:", row)
+        console.log("intervalArr:", intervalArr);
+
+      });  //ref all things javascript youtube
+
+
+
+
+    } */
+
+function changeDataFormat(data){
+
+  intervalArr = [];
+  
+  data.forEach(function (feature) {
+
+    let minYear = 1850;
+    let maxYear = 1870;
+     
+    const properties = feature.properties;
+    let lossDate = properties.LOSSDATE;
+
+    if (lossDate >= minYear && lossDate <= maxYear){
+
+      intervalArr.push(properties);
+
+    }
+  })
+  console.log("intervalArr:", intervalArr);
+}
+
+  /* rigDescArr.push(properties.RIGDESC);
+  hullDescArr.push(properties.HULLDESC);
+  shipTypeArr.push(properties.SHIPTYPEDE);
+  countryArr.push(properties.COUNTRY);
+  buildDateArr.push(properties.BUILDDATE);
+  lossDateArr.push(properties.LOSSDATE); */
+
+
+
+});
