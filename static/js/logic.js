@@ -16,7 +16,7 @@ const iconUrls = {
 const defaultIconUrl = 'static/images/ship.png';
 
 //set default years
-let startYear = 0
+let startYear = 1
 let endYear = 2030
 
 // Initialize the map

@@ -56,7 +56,7 @@ def getYearDocuments(start_year, end_year):
     # Modify the query to filter by build date and loss date
     ship_documents = list(collection.find({
         "$and": [
-            {"properties.BUILDDATE": {"$gte": start_year}},
+            {"properties.LOSSDATE": {"$gte": start_year}},
             {"properties.LOSSDATE": {"$lte": end_year}}
         ]
     }))
