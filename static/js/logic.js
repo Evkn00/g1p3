@@ -15,6 +15,10 @@ const iconUrls = {
 };
 const defaultIconUrl = 'static/images/ship.png';
 
+//set default years
+let startYear = 0
+let endYear = 2030
+
 // Initialize the map
 let myMap = L.map("map", {
     center: [-30.8, 130.9],
@@ -63,7 +67,7 @@ function createMarkerLayer(data) {
   
   
   // Use D3.js to load the data
-  const url = 'http://127.0.0.1:5000/documents'; // URL for Flask API
+  let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;// URL for Flask API
   d3.json(url)
     .then(function(data) {
       window.data = data; //makes data readable throughout code
