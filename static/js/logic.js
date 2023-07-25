@@ -236,19 +236,23 @@ slider.noUiSlider.on("update", function (values) {
 
 // Function to clear the map and recreate it
 function refreshMap() {
-  myMap.eachLayer((layer) => {
-    layer.remove();
-  })
+  // Remove the existing marker layer from the map
+  if (markerLayer) {
+    markerLayer.clearLayers();
+    myMap.removeLayer(markerLayer);
+  }
 
   // Remove the existing legend control from the map
-/*   legend.removeFrom(myMap); */
+  if (legend) {
+    myMap.removeControl(legend);
+  }
 
   // Rebuild the data URL with the updated startYear and endYear
   let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;
-  console.log(url)
+  console.log(url);
 
   // Recreate the map
-  makeMap(url);
+  markerLayer = makeMap(url);
 }
 
 // Add event listener to the refresh button
