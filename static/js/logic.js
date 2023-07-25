@@ -298,7 +298,7 @@ d3.json(url)
       //console.log(valueData);
 
       let plotData = [{
-        x: valueData,
+        x: lossDateArr,
         type: "histogram"
       }]
 
