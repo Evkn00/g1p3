@@ -86,8 +86,8 @@ function createMarkerLayer(data) {
 
       // layer list
       const baseLayers = {
-        'Stamen Watercolor': defaultTileLayer,
-        'OpenStreetMap': secondTileLayer,
+        'Pirate Map': defaultTileLayer,
+        'Boring Map': secondTileLayer,
       };
       
       // Create layer control
