@@ -15,6 +15,10 @@ const iconUrls = {
 };
 const defaultIconUrl = 'static/images/ship.png';
 
+//set default years
+let startYear = 1
+let endYear = 2030
+
 // Initialize the map
 let myMap = L.map("map", {
   center: [-30.8, 130.9],
