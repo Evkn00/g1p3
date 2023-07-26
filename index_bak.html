@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>South Australian Shipwrecks</title>
+
+  <!-- Style Sheet-->
+  <link rel="stylesheet" href="static/css/style.css" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   
+  <!-- Import D3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+
+  <!-- Import nouislider CSS -->
+  <link rel="stylesheet" href="static/css/nouislider.min.css" />
+
+  <!-- Import Leaflet.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+</head>
+
+<body style="background-image: url('static/images/etienne-lehuede-IUBQKMEU9yg-unsplash.jpg')";>
+    <div class="jumbotron" style="background: rgba(204, 204, 204, 0.2); padding-top: 0; height:120px;">
+        <h1 class="display-3">South Australian Shipwrecks</h1>
+        <p class="lead">Data on 705 shipwrecks between 1837 - 2002.</p>
+    </div>
+    </div>
+<!-- Slider Container -->
+<div style="margin: 20px;">
+  <!-- Add the nouislider element -->
+  <div id="slider-date"></div>
+  <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+    <input type="number" min='1837' max='2002' id="input-number-min">
+    <input type="number" min='1837' max='2002' id="input-number-max">
+  </div>
+  <!-- Add the refresh button -->
+  <button id="refresh-button">Refresh Map</button>
+</div>
+    <!-- 2nd Row -->
+    <div class="row" style="height: 50vh;">
+      <!-- First Box (75% width) -->
+      <div class="col-md-9">
+        <div class="map" id="map"></div>
+      </div>
+
+      <!-- Second Box (25% width) -->
+      <div class="col-md-3" id="story-box">
+        <h2 id="wreck-name"></h2>
+        <p><strong>Loss Date:</strong> <span id="loss-date"></span></p>
+        <p><strong>Loss Location:</strong> <span id="loss-location"></span></p>
+        <p><strong>Loss Cause:</strong> <span id="loss-cause"></span></p>
+        <p><strong>Build Date:</strong> <span id="build-date"></span></p>
+        <p><strong>Hull Description:</strong> <span id="hull-desc"></span></p>
+        <p><strong>Port Built:</strong> <span id="port-built"></span></p>
+        <p><strong>Rig Description:</strong> <span id="rig-desc"></span></p>
+        <p><strong>Wreck Number:</strong> <span id="wreck-number"></span></p>
+      </div>
+    </div>
+
+    <!-- 3rd Row -->
+    <div class="row" style="height: 30vh;">
+      <!-- Full-width Box -->
+      <div class="container">
+      <div class="col charts">
+        <h2>Graph box</h2>
+        <p>Graphs Go Here!.</p>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Import logic.js -->
+  <script src="static/js/nouislider.min.js"></script>
+  <script src="static/js/icons.js"></script>
+  <script src="static/js/createLegend.js"></script>
+  <script src="static/js/tileLayers.js"></script>
+  <script src="static/js/createMarkerLayer.js"></script>
+  <script src="static/js/logic.js"></script>
+  
+</body>
+
+</html>
