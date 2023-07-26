@@ -10,7 +10,7 @@ We have chosen to create our HTML page using a [geojson dataset](https://data.sa
 
 To create the HTML page we have utilised [Python Flask-powered API](https://flask.palletsprojects.com/en/2.3.x/), [HTML/CSS](https://html.com/), [JavaScript](https://www.javascript.com/), [D3](https://d3js.org/), [Python](https://www.python.org/), [jupyter](https://jupyter.org/), [pyMongo](https://pymongo.readthedocs.io/en/stable/), [MongoDB](https://www.mongodb.com/), [Leaflet](https://leafletjs.com/), [Plotly](https://plotly.com/javascript/), [noUiSlider](https://refreshless.com/nouislider/) and [Bootstrap](https://www.bootstrapcdn.com/).
 
-While the dataset contains a lot of data, our visulation and story telling focused on: Build date, Loss date, Country, Hull description, Loss cause, region and Rig Description (type of ship)<img src="static/images/barque.png" alt="ship" width="30" height="30">.
+While the dataset contains a lot of data, our visualisation and story telling focused on: Build date, Loss date, Country, Hull description, Loss cause, region and Rig Description (type of ship)<img src="static/images/barque.png" alt="ship" width="30" height="30">.
 
 **Installation:**
 
