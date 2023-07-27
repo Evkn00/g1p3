@@ -61,15 +61,8 @@
 //DatePlot
   function ShipwreckDatePlot(lossDateArr) {
   
-    let obj = {};
-  
-    lossDateArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
-  
-    keyData = Object.keys(obj);
-    valueData = Object.values(obj);
-  
     let plotData = [{
-      x: keyData,
+      x: lossDateArr,
       type: "histogram"
     }]
   
