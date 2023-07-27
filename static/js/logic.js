@@ -279,6 +279,18 @@ slider.noUiSlider.on("update", function (values) {
   endYear = newMaxYear;
 }); 
 
+// Function to update the slider when the input fields change
+inputMin.addEventListener("change", updateSlider);
+inputMax.addEventListener("change", updateSlider);
+
+function updateSlider() {
+  const newMinYear = parseInt(inputMin.value);
+  const newMaxYear = parseInt(inputMax.value);
+  slider.noUiSlider.set([newMinYear, newMaxYear]);
+  startYear = newMinYear;
+  endYear = newMaxYear;
+}
+
 // Function to update the legend content
 function updateLegendContent() {
   if (legend) {
