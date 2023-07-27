@@ -62,37 +62,12 @@ function makeMap(xxx) {
         buildDateArr.push(properties.BUILDDATE);
         lossDateArr.push(properties.LOSSDATE);
       });
-<<<<<<< HEAD
       
       //CountryPlot(data)
       //HullPlot(data)
       
       doPlots(data)
  
-=======
-  
-      // Log the arrays for verification
-      console.log("RIGDESC Array:", rigDescArr);
-      console.log("HULLDESC Array:", hullDescArr);
-      console.log("SHIPTYPEDE Array:", shipTypeArr);
-      console.log("COUNTRY Array:", countryArr);
-      console.log("BUILDDATE Array:", buildDateArr);
-      console.log("LOSSDATE Array:", lossDateArr);
-
-      // Initialize the marker layer with all ships
-      markerLayer = createMarkerLayer(data);
-
-    // Add the marker layer to the map
-    markerLayer.addTo(myMap);
-
-    // Update the legend content
-    updateLegendContent();
-
-    // Get unique RIGDESC values
-    var rigDescValues = data.map(function(feature) {
-    return feature.properties.RIGDESC;
-    return markerLayer;
->>>>>>> 15972d284523637d25f20c6a054c620db0f821a5
     });
   
 
@@ -204,10 +179,8 @@ function createLegend() {
   return markerLayer;
 
   
-});
-
-
 };
+
 
 
 makeMap(url)
@@ -244,10 +217,23 @@ slider.noUiSlider.on("update", function (values) {
   endYear = newMaxYear;
 }); 
 
-<<<<<<< HEAD
-function doPlots(data){
-  console.log("updatePlot: ", data)
+function doPlots(data, selectedButton){
+  console.log("doPlots: ", data)
+
+  if(selectedButton === "country"){
+    CountryPlot(data)
+  } else if (selectedButton === "date"){
+      ShipwreckDatePlot(data)
+  } else if (selectedButton === "hull"){
+      HullPlot(data)
+  } else if (selectedButton === "rig"){
+      RigDescPlot(data)
+  } else {
+    CountryPlot(data)
+  }
 }
+  
+
 
 
 function CountryPlot(data) {
@@ -303,6 +289,8 @@ function CountryPlot(data) {
 
 function ShipwreckDatePlot(data) {
 
+  console.log("Country plot", data)
+
   let array = []
 
   data.forEach(function (feature) {
@@ -316,16 +304,17 @@ function ShipwreckDatePlot(data) {
     //lossDateArr.push(properties.LOSSDATE);
   });
 
-  console.log("array:", array);
+  //console.log("lossDateArr", lossDateArr)
 
   let obj = {};
 
-  array.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+  //lossDateArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
 
-  keyData = Object.keys(obj);
-  valueData = Object.values(obj);
+  //keyData = Object.keys(obj);
+  //valueData = Object.values(obj);
 
-  console.log (keyData)
+  //console.log(keyData);
+  //console.log(valueData);
 
   let plotData = [{
     x: array,
@@ -343,26 +332,113 @@ function ShipwreckDatePlot(data) {
     },
     yaxis: {
       title: "Number of Shipwrecks"
-=======
-// Function to update the legend content
-function updateLegendContent() {
-  if (legend) {
-    // Create the legend content
-    let div = L.DomUtil.create("div", "info legend");
-    div.innerHTML += "<h4>Ships</h4>";
-    ships = ["All", "Barque", "Brig", "Brigantine", "Cutter", "Dandy", "Ketch", "Lugger", "Schooner", "Ship", "Sloop", "Snow", "Yawl"];
-    labels = ["static/images/ship.png", "static/images/barque.png", "static/images/Brig.png", "static/images/brigantine.png", "static/images/cutter.png", "static/images/dandy.png", "static/images/Ketch.png", "static/images/lugger.png", "static/images/Schooner.png", "static/images/ship.png", "static/images/Sloop.png", "static/images/Snow.png", "static/images/yawl.png"];
-
-    // loop through our ships and generate a label with their png for each ship
-    for (var i = 0; i < ships.length; i++) {
-      div.innerHTML += `<img src="${labels[i]}" height="20" width="20" onclick="filterByShipType('${ships[i]}')">${ships[i]}<br>`;
->>>>>>> 15972d284523637d25f20c6a054c620db0f821a5
     }
-
-    // Update the content of the existing legend control
-    legend.getContainer().innerHTML = div.innerHTML;
   }
-}
+
+  Plotly.newPlot("plot", plotData, layout);
+
+};
+
+function HullPlot(data) {
+
+  //console.log(hullDescArr)
+  let array = []
+
+  data.forEach(function (feature) {
+    const properties = feature.properties;
+
+    //rigDescArr.push(properties.RIGDESC);
+    //hullDescArr.push(properties.HULLDESC);
+    //shipTypeArr.push(properties.SHIPTYPEDE);
+    array.push(properties.HULLDESC);
+    //buildDateArr.push(properties.BUILDDATE);
+    //lossDateArr.push(properties.LOSSDATE);
+  });
+
+  let obj = {};
+
+  data.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+
+
+  /* console.log("obj: ", obj);
+  console.log(hullDescArr); */
+
+  keyData = Object.keys(obj);
+  valueData = Object.values(obj);
+
+  let plotData = [{
+    type: "pie",
+    labels: keyData,
+    values: valueData
+
+  }]
+
+  let layout = {
+    title: "Shipwrecks by Hull Type",
+
+
+  }
+
+  //Plotly.newPlot("plot", plotData, layout);
+  Plotly.newPlot("plot", plotData, layout);
+
+};
+
+function RigDescPlot(data) {
+
+  //console.log(rigDescArr)
+  let array = []
+
+  data.forEach(function (feature) {
+    const properties = feature.properties;
+
+    //rigDescArr.push(properties.RIGDESC);
+    //hullDescArr.push(properties.HULLDESC);
+    //shipTypeArr.push(properties.SHIPTYPEDE);
+    array.push(properties.RIGDESC);
+    //buildDateArr.push(properties.BUILDDATE);
+    //lossDateArr.push(properties.LOSSDATE);
+  });
+
+  let obj = {};
+
+  data.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+
+
+
+  /* console.log("obj: ", obj);
+  console.log(rigDescArr); */
+
+  keyData = Object.keys(obj);
+  valueData = Object.values(obj);
+
+  let plotData = [{
+    x: keyData,
+    y: valueData,
+    type: "bar",
+    marker: {
+      color: "orange"
+    }
+  }]
+
+  let layout = {
+    autosize: false,
+    width: 400,
+    height: 300,
+    title: "Shipwrecks by Rigging Type",
+    xaxis: {
+      title: "Type of Rigging"
+    },
+    yaxis: {
+      title: "Number of Shipwrecks"
+    }
+  }
+
+  //Plotly.newPlot("plot", plotData, layout);
+  Plotly.newPlot("plot", plotData, layout);
+
+};
 
 // Function to clear the map and recreate it
 function refreshMap() {
@@ -391,6 +467,8 @@ function refreshMap() {
 
   // Add the layer control again
   layerControl.addTo(myMap);
+
+  doPlots()
 }
 
 // Add event listener to the refresh button
@@ -398,26 +476,26 @@ document.getElementById("refresh-button").addEventListener("click", function () 
   console.log(`startYear: ${startYear}, endYear: ${endYear}`);
   refreshMap();
 });
-<<<<<<< HEAD
 
 
 // analysis button event listeners
 
 d3.select("#btnShipwreckCountry").on("click", function () {
-  graph = 
-  CountryPlot(data);
+  let selectedButton = "country";
+  doPlots(data, selectedButton);
 });
 
 d3.select("#btnShipwreckHull").on("click", function () {
-  HullPlot(data);
+  let selectedButton = "hull";
+  doPlots(data, selectedButton);
 });
 
 d3.select("#btnShipwreckDate").on("click", function () {
-  ShipwreckDatePlot(data);
+  let selectedButton = "date";
+  doPlots(data, selectedButton);
 });
 
 d3.select("#btnShipwreckRig").on("click", function () {
-  RigDescPlot(data);
+  let selectedButton = "rig";
+  doPlots(data, selectedButton);
 });
-=======
->>>>>>> 15972d284523637d25f20c6a054c620db0f821a5
