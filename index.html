@@ -61,24 +61,30 @@
       </div>
     </div>
 
-    <!-- 3rd Row -->
-    <div class="row" style="height: 30vh;">
-      <!-- Full-width Box -->
-      <div class="container">
-      <div class="col charts">
-        <h2>Graph box</h2>
-        <p>Graphs Go Here!.</p>
-      </div>
-    </div>
-    </div>
 
+<!-- 3rd Row -->
+<div class="row" style="height: 30vh; padding-top:20px">
+  <!-- First Box (25% width) -->
+  <div class="col-md-2 chartButtonBox">
+    <!-- add bootstrap buttons and stack -->
+    <button id="bar-chart-button" class="btn btn-primary btn-block mb-2">Hull Type</button>
+    <button id="line-chart-button" class="btn btn-secondary btn-block mb-2">Country</button>
+    <button id="pie-chart-button" class="btn btn-success btn-block mb-2">Shipwreck Dates</button>
+    <button id="scatter-plot-button" class="btn btn-info btn-block mb-2;">Rig Description</button>
   </div>
+  <!-- Second Box (75% width) -->
+  <div class="col-md-7 chartContainer">
+    <div class="chart" id="chart"></div>
+  </div>
+</div>
 
   <!-- Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Import logic.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="static/js/charts.js"></script>
   <script src="static/js/nouislider.min.js"></script>
   <script src="static/js/icons.js"></script>
   <script src="static/js/createLegend.js"></script>

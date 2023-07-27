@@ -5,6 +5,14 @@
   let markerLayer
   let legend
 
+  // Summary Statslet rigDescArr = [];
+  let hullDescArr = [];
+  let shipTypeArr = [];
+  let countryArr = [];
+  let buildDateArr = [];
+  let lossDateArr = [];
+  let rigDescArr = [];
+
   // Create data URL
   let url = `http://127.0.0.1:5000/documents/${startYear}/${endYear}`;// URL for Flask API
 
@@ -23,21 +31,13 @@ function makeMap(xxx) {
       window.data = data; //makes data readable throughout code
       console.log(data);
 
-      defaultTileLayer.addTo(myMap);
       
-      // Generate summary stats
+      defaultTileLayer.addTo(myMap);
+            // Generate summary stats
       // Number of records
       let numberOfRecords = data.length;
       console.log("Number of records: ", numberOfRecords);
   
-      // Summary Stats
-      const rigDescArr = [];
-      const hullDescArr = [];
-      const shipTypeArr = [];
-      const countryArr = [];
-      const buildDateArr = [];
-      const lossDateArr = [];
-
       // calculate the first and last year of shipwrecks
       const lossDates = data.map((feature) => parseInt(feature.properties.LOSSDATE));
 
@@ -50,7 +50,15 @@ function makeMap(xxx) {
 
       console.log("Minimum Year:", minYear);
       console.log("Maximum Year:", maxYear);
-  
+
+      //reset arrays
+      hullDescArr = [];
+      shipTypeArr = [];
+      countryArr = [];
+      buildDateArr = [];
+      lossDateArr = [];
+      rigDescArr = [];
+
       // Loop through each feature in the GeoJSON data
       data.forEach(function(feature) {
         const properties = feature.properties;
@@ -61,8 +69,18 @@ function makeMap(xxx) {
         countryArr.push(properties.COUNTRY);
         buildDateArr.push(properties.BUILDDATE);
         lossDateArr.push(properties.LOSSDATE);
+     
+       
       });
-  
+//initial plot
+      HullPlot(hullDescArr)
+
+
+
+
+
+
+
       // Log the arrays for verification
       console.log("RIGDESC Array:", rigDescArr);
       console.log("HULLDESC Array:", hullDescArr);
@@ -70,6 +88,10 @@ function makeMap(xxx) {
       console.log("COUNTRY Array:", countryArr);
       console.log("BUILDDATE Array:", buildDateArr);
       console.log("LOSSDATE Array:", lossDateArr);
+
+
+    
+
 
       // Initialize the marker layer with all ships
       markerLayer = createMarkerLayer(data);
@@ -86,6 +108,7 @@ function makeMap(xxx) {
     return markerLayer;
     });
   
+
 
     // Function to update the map with the selected ship type
     function updateMap(selectedRigDesc) {
@@ -112,6 +135,7 @@ function makeMap(xxx) {
   };
 
 
+
 // Function to populate the story box
 window.populateStoryBox = function(properties) {
     const storyBox = document.getElementById("story-box");
@@ -127,6 +151,7 @@ window.populateStoryBox = function(properties) {
         <p><strong>Rig Description:</strong> ${properties.RIGDESC}</p>
     `;
   };
+
 
 
 function createLegend() {
@@ -166,6 +191,9 @@ function createLegend() {
     }
   };
   
+  
+
+
   function updateMap(selectedRigDesc) {
     // Check if selectedRigDesc is not null before proceeding
     if (selectedRigDesc !== null) {
@@ -191,17 +219,43 @@ function createLegend() {
   
     // Add the new marker layer to the map
     markerLayer.addTo(myMap);
-  }
-  return markerLayer;
 
-  
+    return markerLayer;
+  }
 });
 
 
 };
 
-
 makeMap(url)
+
+//plot call functions 
+function hullTypeCall() {
+  HullPlot(hullDescArr);
+};
+
+function countryTypeCall() {
+  countryPlot(countryArr);
+};
+
+function datePlotCall() {
+  ShipwreckDatePlot(lossDateArr);
+};
+
+function rigPlotCall() {
+  RigDescPlot(rigDescArr);
+};
+
+
+
+// Attach click event listeners to the buttons
+  d3.select("#bar-chart-button").on("click", hullTypeCall);
+  d3.select("#line-chart-button").on("click", countryTypeCall);
+  d3.select("#pie-chart-button").on("click", datePlotCall);
+  d3.select("#scatter-plot-button").on("click", rigPlotCall);
+
+
+
 
 // Get references to the input fields and the slider
 const inputMin = document.getElementById("input-number-min");
