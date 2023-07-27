@@ -38,9 +38,29 @@ __    **Add visualation once complete of a screenshot of the map visualisation.*
 **Installation:**
 
 Please clone the github and then perform the following to allow the HTML file to run correctly:
-	@@ -35,6 +58,12 @@ Please note:
+- run [main.ipynb](main.ipynb)
+- run [app.py](app.py)
+- install [Flask Cors](https://pypi.org/project/Flask-Cors/) if not already installed
+- setup a [local host](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Tools_and_setup/set_up_a_local_testing_server)
+- Load project in Google Chrome Incognito window
+
+Please note:
+- CORS errors due to local hosting have been different on all 3 of our machines, but as of now it is working on all 3 (2 windows, 1 mac). The IPYNB to create the mongo server functions slighty differently for each of us (due to the various use of / \ by local machines).
+
+**Contents:**
+- [app.py](app.py) - Flask Server
+- [main.ipynb](main.ipynb) - Mongo db setup + flask setup
+- [logic.js](static/js/logic.js) - main js file including mapping and click monitoring
+- [.js files](static/js) - js files with stand alone functions to support running of the main js file
+- [style.css](static/css/style.css) - main file styling
+- [TOPO_Shipwrecks_GDA2020.geojson](data/TOPO_Shipwrecks_GDA2020.geojson) - original geojson data file. Unfortunately the datasource does not have a live version, so can only be downloaded as .zip.
+- [index.html](index.html) - html file for display.
 - [Images](static/images) - includes icons for map and background image. Icons sourced from [Etsy](https://www.etsy.com/au/shop/GJBClipArts?ref=l2-about-shopname)
 - [Presentation](Presentation/Presentation%20Slides.pptx) - Presentation outlining our project
+
+  **Attributes**
+
+  Code has been sourced from in class activities, along with the websites outline above for each code utilised, along with the assistance of sites such as stack overflow when errors arose.
 
 **Attributes**
 
