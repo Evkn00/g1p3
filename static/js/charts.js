@@ -50,6 +50,9 @@
       },
       yaxis: {
         title: "Number of Shipwrecks"
+      },
+      marker: {
+        color: "green"
       }
      }
  
@@ -63,7 +66,8 @@
   
     let plotData = [{
       x: lossDateArr,
-      type: "histogram"
+      type: "histogram",
+      xbins: {size: 1, start: 0, end: 2002},
     }]
   
     let layout = {
