@@ -15,6 +15,8 @@ While the dataset contains a lot of data, our visualisation and story telling fo
 
 **Visualisations**    
 
+![2023-07-27](https://github.com/Evkn00/g1p3/assets/127099343/160bce6e-b42a-4d65-8827-8b0a02652b21)
+
 _All visualisations are driven by the slider at the top of the page. The slider is based on the date the shipwreck occured._
 
 - _Map Visualisation_  
@@ -30,13 +32,24 @@ _All visualisations are driven by the slider at the top of the page. The slider 
      -   The storybook includes essential details such as Loss Date, Loss Location, Loss Cause, Build Date, Hull Description, Port Built, Rig Description, and Wreck Number.
      -   This storytelling approach allows users to delve into specific shipwreck narratives, providing a deeper understanding of each event and its historical significance.  
 
-- plots
-   -    to be updated once complete  
+- _Plot Visualisation_   
+   -    _Hull Type (Pie Chart):_ The purpose of the pie chart is to illustrate the distribution of shipwrecks based on different hull types.  
+       -    Users can quickly identify which hull types are the most common and which are relatively rare. Hovering over each segment of the pie chart reveals the exact count and percentage of shipwrecks for that hull type, providing users with precise information at a glance.
 
-__    **Add visualation once complete of a screenshot of the map visualisation.**__
-
+   -    _Country (Histogram):_ The histogram aims to showcase the distribution of shipwrecks across different countries.    
+       -    Each bar on the histogram represents a specific country where shipwrecks have occurred.  
+       -    The height of each bar corresponds to the number of shipwrecks in the respective country, allowing users to compare the frequency of shipwrecks between countries.  By analyzing the histogram, users can identify countries with a high number of shipwrecks and explore potential factors contributing to these patterns.
+  
+   -    _Shipwreck Dates (Histogram):_  The histogram illustrates the frequency of shipwrecks over time, providing insights into the temporal distribution of shipwreck incidents.  
+       -    The x-axis represents the range of dates, and the y-axis displays the number of shipwrecks within each time interval.  
+       -    Users can observe trends and patterns in shipwrecks over different time periods.  The histogram allows users to spot any notable spikes or declines in shipwreck incidents, potentially indicating historical events or changes in maritime practices.
+     
+   -    _Rig Description (Histogram):_  The histogram showcases the distribution of shipwrecks based on different rig descriptions.  
+       -    Each bar on the histogram represents a specific rig description, such as Barque, Brig, Ketch, Sloop, etc.  
+       -    The height of each bar corresponds to the number of shipwrecks with the corresponding rig description.  By analyzing the histogram, users can understand which rig descriptions were common and which were less prevalent during shipwrecks. This plot provides valuable insights into the variety of ship types involved in maritime incidents.  
 
 **Installation:**
+
 
 Please clone the github and then perform the following to allow the HTML file to run correctly:
 - run [main.ipynb](main.ipynb)
@@ -47,6 +60,7 @@ Please clone the github and then perform the following to allow the HTML file to
 
 Please note:
 - CORS errors due to local hosting have been different on all 3 of our machines, but as of now it is working on all 3 (2 windows, 1 mac). The IPYNB to create the mongo server functions slighty differently for each of us (due to the various use of / \ by local machines).
+- The visualisations show best at a screen resolution 1920 x 1080.
 
 **Contents:**
 - [app.py](app.py) - Flask Server
@@ -61,7 +75,8 @@ Please note:
 
 **Attributes**
 
-Code has been sourced from in class activities, along with the websites outline above for each code utilised, along with the assistance of sites such as stack overflow when errors arose.
+Code has been sourced from in class activities, along with the websites outline above for each code utilised, along with the assistance of sites such as stack overflow when errors arose.  
+Our background picture has been sourced from a photo taken by [Etienne Lehuédé](https://unsplash.com/photos/IUBQKMEU9yg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 **License**
 
