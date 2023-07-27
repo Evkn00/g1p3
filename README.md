@@ -1,5 +1,6 @@
 # Project 3 - Story Telling with Data Visualisations
 _Data Analytics BootCamp (updated 26/07/2023)_
+
 # Group 1
 Contributors:  
 David Baldwin, Juanita Sands, Tim Cook
@@ -57,10 +58,6 @@ Please note:
 - [index.html](index.html) - html file for display.
 - [Images](static/images) - includes icons for map and background image. Icons sourced from [Etsy](https://www.etsy.com/au/shop/GJBClipArts?ref=l2-about-shopname)
 - [Presentation](Presentation/Presentation%20Slides.pptx) - Presentation outlining our project
-
-  **Attributes**
-
-  Code has been sourced from in class activities, along with the websites outline above for each code utilised, along with the assistance of sites such as stack overflow when errors arose.
 
 **Attributes**
 
