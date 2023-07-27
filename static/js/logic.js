@@ -193,7 +193,11 @@ function createLegend() {
     markerLayer.addTo(myMap);
   }
   return markerLayer;
+
+  
 });
+
+
 };
 
 

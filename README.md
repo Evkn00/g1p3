@@ -1,19 +1,41 @@
-# g1p3
-AUDABC Group 1 Project 3 
-Update 16/07/2023
+While the dataset contains a lot of data, our visualisation and story telling focused on: Build date, Loss date, Country, Hull description, Loss cause, region and Rig Description (type of ship)<img src="static/images/barque.png" alt="ship" width="30" height="30">.
 
-Please note when marking:
-- Load project in Google Chrome Incognito window.
-- CORS errors due to local hosting have been diferent on all 3 of our machines, but as of now it is working on all 3 (2 windows, 1 mac). The IPYNB to create the mongo server functions slighty differently for each of us, hopefully it works, but it works for us now.
+**Visualisations**    
+
+_All visualisations are driven by the slider at the top of the page. The slider is based on the date the shipwreck occured._
+
+- _Map Visualisation_  
+    - The purpose of the map is to visually show the locations of shipwrecks in South Australia and adjacent waters.  
+    - Each shipwreck is represented by a marker on the map. The type of ship is depicted using an image, providing a quick visual identification.  
+    - The map offers interactivity through a legend, allowing users to filter shipwrecks based on ship types. Clicking on a ship type in the legend shows or hides the corresponding markers on the map, enabling users to focus on specific ship types.  
+    - Users can also interact with the map by zooming in to explore individual shipwreck locations in more detail.  
+    - When used in conjunction with the slider, the map allows users to gain insights into the distribution of shipwrecks over time, regions, and types of ships. By adjusting the slider, users can observe how shipwrecks are distributed across different periods, providing valuable historical and geographical perspectives.  
+
+- _Storybook Visualisation_    
+     -   The storybook feature is activated when users click on an individual shipwreck marker on the map.
+     -   Upon clicking a marker, a storybook-style display appears, presenting detailed information about the selected shipwreck.
+     -   The storybook includes essential details such as Loss Date, Loss Location, Loss Cause, Build Date, Hull Description, Port Built, Rig Description, and Wreck Number.
+     -   This storytelling approach allows users to delve into specific shipwreck narratives, providing a deeper understanding of each event and its historical significance.  
+
+- plots
+   -    to be updated once complete  
+
+__    **Add visualation once complete of a screenshot of the map visualisation.**__
 
 
-- app.py - Flask Server
-- main.ipynb - Mongo db setup + flask setup
-- logic.js - main js file including mapping and click monitoring
-- style.css - main file styling
-- data/TOPO_Shipwrecks_GDA2020.geojson - geojson data file. Unfortunately the datasource does not have a live version, so can only be downloaded as .zip.
-- index.html - html file for display.
-- Images folder - includes icons for map and background image.
-- Superseeded folder - old version kept just in case.
+**Installation:**
 
+Please clone the github and then perform the following to allow the HTML file to run correctly:
+	@@ -35,6 +58,12 @@ Please note:
+- [Images](static/images) - includes icons for map and background image. Icons sourced from [Etsy](https://www.etsy.com/au/shop/GJBClipArts?ref=l2-about-shopname)
+- [Presentation](Presentation/Presentation%20Slides.pptx) - Presentation outlining our project
 
+**Attributes**
+
+Code has been sourced from in class activities, along with the websites outline above for each code utilised, along with the assistance of sites such as stack overflow when errors arose.
+
+**License**
+
+This project is open-source and available under the [Creative Common License](https://creativecommons.org/licenses/by/4.0/). You are free to use, modify, and distribute the code in accordance with the terms of the CC License ![88x31](https://github.com/Evkn00/g1p3/assets/127099343/014e8657-cc39-4673-954d-883e08bb2cc7).
+
+The shipwreck dataset is also covered by [Creative Common License](https://creativecommons.org/licenses/by/4.0/) ![88x31](https://github.com/Evkn00/g1p3/assets/127099343/014e8657-cc39-4673-954d-883e08bb2cc7)
