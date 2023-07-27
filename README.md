@@ -15,6 +15,8 @@ While the dataset contains a lot of data, our visualisation and story telling fo
 
 **Visualisations**    
 
+![2023-07-27](https://github.com/Evkn00/g1p3/assets/127099343/160bce6e-b42a-4d65-8827-8b0a02652b21)
+
 _All visualisations are driven by the slider at the top of the page. The slider is based on the date the shipwreck occured._
 
 - _Map Visualisation_  
@@ -45,11 +47,6 @@ _All visualisations are driven by the slider at the top of the page. The slider 
    -    _Rig Description (Histogram):_  The histogram showcases the distribution of shipwrecks based on different rig descriptions.  
        -    Each bar on the histogram represents a specific rig description, such as Barque, Brig, Ketch, Sloop, etc.  
        -    The height of each bar corresponds to the number of shipwrecks with the corresponding rig description.  By analyzing the histogram, users can understand which rig descriptions were common and which were less prevalent during shipwrecks. This plot provides valuable insights into the variety of ship types involved in maritime incidents.  
-
-![2023-07-27](https://github.com/Evkn00/g1p3/assets/127099343/160bce6e-b42a-4d65-8827-8b0a02652b21)
-
-
-
 
 **Installation:**
 
