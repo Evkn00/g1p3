@@ -64,52 +64,15 @@ function makeMap(xxx) {
       
       //CountryPlot(data)
       //HullPlot(data)
-      ShipwreckDatePlot(data)
+      
+      UpdatePlot(data)
  
     });
 
    
   };
 
-  
-  /* 
-    let obj = {};
 
-    countryArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
-
-    keyData = Object.keys(obj);
-    valueData = Object.values(obj);
-
-    let plotData = [{
-      x: keyData,
-      y: valueData,
-      type: "bar"
-    }]
-
-    let layout = {
-      autosize: false,
-      width: 400,
-      height: 300,
-      title: "Shipwrecks by Country of Origin",
-      xaxis: {
-        title: "Country of Origin",
-        tickangle: 45
-      },
-      yaxis: {
-        title: "Number of Shipwrecks"
-      }
-
-    }
-
-    //Plotly.newPlot("plot", plotData, layout);
-    Plotly.newPlot("plot", plotData, layout);
-  */
-  
-
-  
- 
-  
-  
 
 // Get references to the input fields and the slider
 const inputMin = document.getElementById("input-number-min");
@@ -142,6 +105,11 @@ slider.noUiSlider.on("update", function (values) {
   startYear = newMinYear;
   endYear = newMaxYear;
 }); 
+
+function updatePlot(data){
+  console.log("updatePlot: ", data)
+}
+
 
 function CountryPlot(data) {
 
@@ -190,7 +158,6 @@ function CountryPlot(data) {
 
   }
 
-  //Plotly.newPlot("plot", plotData, layout);
   Plotly.newPlot("plot", plotData, layout);
 
 };
@@ -219,9 +186,10 @@ function ShipwreckDatePlot(data) {
   keyData = Object.keys(obj);
   valueData = Object.values(obj);
 
+  console.log (keyData)
 
   let plotData = [{
-    x: lossDateArr,
+    x: array,
     type: "histogram"
   }]
 
@@ -300,8 +268,6 @@ function RigDescPlot(rigDescArr) {
 
   rigDescArr.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
 
-
-
   /* console.log("obj: ", obj);
   console.log(rigDescArr); */
 
@@ -351,27 +317,6 @@ d3.select("#btnShipwreckRig").on("click", function () {
   RigDescPlot(rigDescArr);
 });
 
-rangeSlider(document.querySelector('#slider'), {
-
-
-  min: minYear,
-  max: maxYear,
-  value: [minYear, maxYear],
-  onInput: function (valueSet) {
-    console.log(valueSet);
-    //minValDiv = document.getElementById("minYear");
-    //maxValDiv = document.getElementById("maxYear");
-    document.getElementById("minYear").value = valueSet[0]; //minYear;
-    document.getElementById("maxYear").value = valueSet[1]; //maxYear;
-
-    createDateInvervalArray(mainObj, valueSet);
-
-
-
-
-
-  }
-});
 
 // Function to clear the map and recreate it
 function refreshMap() {
@@ -400,6 +345,8 @@ function refreshMap() {
 
   // Add the layer control again
   layerControl.addTo(myMap);
+
+
 }
 
 
