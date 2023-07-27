@@ -1,3 +1,15 @@
+# Project 3 - Story Telling with Data Visualisations
+_Data Analytics BootCamp (updated 26/07/2023)_
+# Group 1
+Contributors:  
+David Baldwin, Juanita Sands, Tim Cook
+
+We have been tasked with creating a HTML file to tell a story, that includes 3 data visualisations.
+
+We have chosen to create our HTML page using a [geojson dataset](https://data.sa.gov.au/data/dataset/shipwrecks) of South Australian shipwrecks. The dataset includes all known shipwrecks in SA and adjacent waters.
+
+To create the HTML page we have utilised [Python Flask-powered API](https://flask.palletsprojects.com/en/2.3.x/), [HTML/CSS](https://html.com/), [JavaScript](https://www.javascript.com/), [D3](https://d3js.org/), [Python](https://www.python.org/), [jupyter](https://jupyter.org/), [pyMongo](https://pymongo.readthedocs.io/en/stable/), [MongoDB](https://www.mongodb.com/), [Leaflet](https://leafletjs.com/), [Plotly](https://plotly.com/javascript/), [noUiSlider](https://refreshless.com/nouislider/) and [Bootstrap](https://www.bootstrapcdn.com/).
+
 While the dataset contains a lot of data, our visualisation and story telling focused on: Build date, Loss date, Country, Hull description, Loss cause, region and Rig Description (type of ship)<img src="static/images/barque.png" alt="ship" width="30" height="30">.
 
 **Visualisations**    

@@ -72,14 +72,8 @@ function makeMap(xxx) {
      
        
       });
-//initial plot
+      //initial plot call
       HullPlot(hullDescArr)
-
-
-
-
-
-
 
       // Log the arrays for verification
       console.log("RIGDESC Array:", rigDescArr);
@@ -88,10 +82,6 @@ function makeMap(xxx) {
       console.log("COUNTRY Array:", countryArr);
       console.log("BUILDDATE Array:", buildDateArr);
       console.log("LOSSDATE Array:", lossDateArr);
-
-
-    
-
 
       // Initialize the marker layer with all ships
       markerLayer = createMarkerLayer(data);
