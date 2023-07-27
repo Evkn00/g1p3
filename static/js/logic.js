@@ -65,8 +65,8 @@ function makeMap(xxx) {
       
       //CountryPlot(data)
       //HullPlot(data)
-      
-      doPlots(data)
+      let selectedButton = "country";
+      doPlots(data, selectedButton)
  
     });
   
@@ -357,7 +357,7 @@ function HullPlot(data) {
 
   let obj = {};
 
-  data.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+  array.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
 
 
 
@@ -403,7 +403,7 @@ function RigDescPlot(data) {
 
   let obj = {};
 
-  data.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
+  array.forEach(val => obj[val] = (obj[val] || 0) + 1);  //ref all things javascript youtube
 
 
 
@@ -468,7 +468,7 @@ function refreshMap() {
   // Add the layer control again
   layerControl.addTo(myMap);
 
-  doPlots()
+  doPlots(data, selectedButton)
 }
 
 // Add event listener to the refresh button
