@@ -75,7 +75,8 @@ Please note:
 
 **Attributes**
 
-Code has been sourced from in class activities, along with the websites outline above for each code utilised, along with the assistance of sites such as stack overflow when errors arose.
+Code has been sourced from in class activities, along with the websites outline above for each code utilised, along with the assistance of sites such as stack overflow when errors arose.  
+Our background picture has been sourced from a photo taken by [Etienne Lehuédé](https://unsplash.com/photos/IUBQKMEU9yg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 **License**
 
