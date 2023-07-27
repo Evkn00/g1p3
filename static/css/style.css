@@ -49,7 +49,7 @@ body {
   margin-left: 20px; /* Adjust the value to control the gap size */
 }
 
-.btn {
+.btn-block {
   height: 80px;
-  font-size: 20px;
+  font-size:50px
 }
