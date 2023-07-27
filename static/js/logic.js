@@ -65,7 +65,7 @@ function makeMap(xxx) {
       //CountryPlot(data)
       //HullPlot(data)
       
-      UpdatePlot(data)
+      doPlots(data)
  
     });
 
@@ -106,7 +106,7 @@ slider.noUiSlider.on("update", function (values) {
   endYear = newMaxYear;
 }); 
 
-function updatePlot(data){
+function doPlots(data){
   console.log("updatePlot: ", data)
 }
 
@@ -360,17 +360,18 @@ document.getElementById("refresh-button").addEventListener("click", function () 
 // analysis button event listeners
 
 d3.select("#btnShipwreckCountry").on("click", function () {
-  CountryPlot();
+  graph = 
+  CountryPlot(data);
 });
 
 d3.select("#btnShipwreckHull").on("click", function () {
-  HullPlot();
+  HullPlot(data);
 });
 
 d3.select("#btnShipwreckDate").on("click", function () {
-  ShipwreckDatePlot();
+  ShipwreckDatePlot(data);
 });
 
 d3.select("#btnShipwreckRig").on("click", function () {
-  RigDescPlot();
+  RigDescPlot(data);
 });
