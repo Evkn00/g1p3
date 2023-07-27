@@ -61,16 +61,32 @@
       </div>
     </div>
 
-    <!-- 3rd Row -->
-    <div class="row" style="height: 30vh;">
-      <!-- Full-width Box -->
-      <div class="container">
-      <div class="col charts">
-        <h2>Graph box</h2>
-        <p>Graphs Go Here!.</p>
-      </div>
-    </div>
-    </div>
+       <!-- 3rd Row -->
+       <div class="row" style="height: 30vh;">
+        <!-- Full-width Box -->
+        <!-- <div class="col-md-3"> -->
+          <!-- <h1 id="analysisHeading">Shipwreck Analysis</h1>-->
+          <div id="analysisButtonPanel">
+  
+            <h2 id="btnHeading">Select Shipwreck Data Using Buttons Below</h2><br>
+  
+            <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckCountry">By Country of Origin</button><br>
+            <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckDate">By Date of Wreck</button><br>
+            <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckHull">By Hull Type</button><br>
+            <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckRig">By Rigging Type</button><br>
+          </div>
+  
+          <div id="plotContainer">
+            <div id="plot"></div>
+          </div>
+  
+          <div id="sliderContainer">
+            <h2 id="sliderHeading">Slide the buttons to Select a Date Range for Shipwreck Data</h2>
+            <div  id="dynamicYears">
+              <textarea name="minYear" id="minYear" cols="4" rows="1"></textarea><span><textarea name="maxYear" id="maxYear" cols="4" rows="1" style="float: right"></textarea></span>
+            </div>
+          <div id="slider"></div>
+          </div>
 
   </div>
 

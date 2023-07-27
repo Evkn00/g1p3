@@ -14,6 +14,8 @@
    
   <!-- Import D3.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 
   <!-- Import nouislider CSS -->
   <link rel="stylesheet" href="static/css/nouislider.min.css" />
@@ -61,18 +63,25 @@
       </div>
     </div>
 
-    <!-- 3rd Row -->
-    <div class="row" style="height: 30vh;">
-      <!-- Full-width Box -->
-      <div class="container">
-      <div class="col charts">
-        <h2>Graph box</h2>
-        <p>Graphs Go Here!.</p>
-      </div>
-    </div>
-    </div>
-
-  </div>
+        <!-- 3rd Row -->
+        <div class="row" style="height: 30vh;">
+          <!-- Full-width Box -->
+          <!-- <div class="col-md-3"> -->
+            <!-- <h1 id="analysisHeading">Shipwreck Analysis</h1>-->
+            <div id="analysisButtonPanel">
+    
+              <h2 id="btnHeading">Select Shipwreck Data Using Buttons Below</h2><br>
+    
+              <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckCountry">By Country of Origin</button><br>
+              <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckDate">By Date of Wreck</button><br>
+              <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckHull">By Hull Type</button><br>
+              <button class="btn-default btn-lg btnAnalysis" id="btnShipwreckRig">By Rigging Type</button><br>
+            </div>
+    
+            <div id="plotContainer">
+              <div id="plot"></div>
+            </div>
+    
 
   <!-- Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
